@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title id="siteTitle">Պատվերի Ձևակերպում | InviteArt</title>
+  
+  <style>
+    /* ========== RESET & ROOT ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0c;
+      --bg-card: #131316;
+      --bg-input: #1c1c22;
+      --border-color: #28282e;
+      --gold: #c9a87c;
+      --gold-light: #ebdcb9;
+      --gold-glow: rgba(201, 168, 124, 0.15);
+      --text-main: #f0ece8;
+      --text-muted: #8e8e96;
+      --radius: 20px;
+      --shadow: 0 20px 48px rgba(0,0,0,0.6);
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(201,168,124,0.04) 0%, transparent 70%);
+    }
+
+    .order-page-container {
+      background: var(--bg-card);
+      max-width: 800px;
+      width: 100%;
+      padding: 32px 24px 40px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    /* ========== HEADER ========== */
+    .header-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-back:hover {
+      background: var(--gold);
+      color: #000;
+      box-shadow: 0 4px 16px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher-global {
+      display: flex;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-switcher-global .switch-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .lang-switcher-global .switch-btn.active {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 2px 8px var(--gold-glow);
+    }
+
+    /* ========== TITLES ========== */
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 4px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin: 0 0 30px;
+    }
+
+    /* ========== FORM SECTIONS ========== */
+    .form-section-block {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-bottom: 22px;
+    }
+
+    .section-block-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-block-title span {
+      background: rgba(201,168,124,0.12);
+      color: var(--gold-light);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .form-group:last-child { margin-bottom: 0; }
+
+    .form-group label {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .form-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+      width: 100%;
+      font-family: var(--font-sans);
+    }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px var(--gold-glow);
+    }
+
+    .form-control::placeholder {
+      color: #55555e;
+    }
+
+    .disabled-input {
+      background: #111116;
+      border-color: #1f1f26;
+      color: var(--gold-light);
+      cursor: not-allowed;
+      font-weight: 500;
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238e8e96' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: calc(100% - 16px) center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* ========== LANGUAGE RADIO ========== */
+    .language-selector-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      flex: 1;
+      min-width: 70px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 10px;
+      text-align: center;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    input[type="radio"]:checked + .lang-btn {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+      font-weight: 600;
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+
+    /* ========== TOGGLES ========== */
+    .toggle-service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-color);
+      gap: 12px;
+    }
+
+    .toggle-service-item:first-of-type { padding-top: 4px; }
+    .toggle-service-item:last-of-type { border-bottom: none; padding-bottom: 4px; }
+
+    .service-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .service-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .service-label { font-size: 0.92rem; font-weight: 500; }
+
+    .switch-box {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch-box input { opacity: 0; width: 0; height: 0; }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #2c2c34;
+      transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 30px;
+    }
+
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      background: var(--text-main);
+      transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    input:checked + .switch-slider { background: var(--gold); }
+    input:checked + .switch-slider:before { transform: translateX(18px); }
+
+    .music-input-subgroup {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      margin-top: 0;
+    }
+
+    .music-input-subgroup.active {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+
+    /* ========== PRICE SUMMARY ========== */
+    .price-summary-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      padding: 16px 24px;
+      background: rgba(201,168,124,0.06);
+      border: 1px dashed var(--gold);
+      border-radius: 16px;
+    }
+
+    .price-summary-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .btn-submit-order {
+      background: linear-gradient(135deg, var(--gold), #b8956a);
+      color: #000;
+      width: 100%;
+      border: none;
+      border-radius: 40px;
+      padding: 18px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px var(--gold-glow);
+    }
+
+    .btn-submit-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201,168,124,0.3);
+      background: var(--gold-light);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 599px) {
+      body { padding: 12px 10px; }
+      .order-page-container { padding: 20px 14px 28px; border-radius: 16px; }
+
+      .header-top-row {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .btn-back { justify-content: center; padding: 10px; font-size: 0.8rem; }
+      .lang-switcher-global { align-self: flex-end; }
+
+      .page-title { font-size: 1.5rem; }
+      .page-subtitle { font-size: 0.82rem; margin-bottom: 20px; }
+
+      .form-section-block { padding: 16px 14px; }
+      .form-grid-2 { grid-template-columns: 1fr; gap: 12px; }
+      .form-group { margin-bottom: 12px; }
+      .form-control { padding: 12px 14px; font-size: 0.9rem; border-radius: 12px; }
+
+      .language-selector-group { gap: 6px; }
+      .lang-btn { padding: 10px 6px; font-size: 0.75rem; min-width: 60px; }
+
+      .service-label { font-size: 0.82rem; }
+      .switch-box { width: 40px; height: 24px; }
+      .switch-slider:before { height: 16px; width: 16px; left: 4px; bottom: 4px; }
+      input:checked + .switch-slider:before { transform: translateX(16px); }
+
+      .price-summary-block { padding: 12px 16px; flex-direction: column; align-items: stretch; text-align: center; }
+      .price-summary-value { font-size: 1.3rem; }
+
+      .btn-submit-order { padding: 16px; font-size: 0.95rem; }
+    }
+
+    @media (max-width: 400px) {
+      .page-title { font-size: 1.3rem; }
+      .form-control { font-size: 0.82rem; padding: 10px 12px; }
+      .lang-btn { font-size: 0.65rem; padding: 8px 4px; }
+      .service-label { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="order-page-container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header-top-row">
+    <a href="catalog.html" class="btn-back" id="lnkBack">← Վերադառնալ</a>
+    <div class="lang-switcher-global">
+      <button class="switch-btn active" onclick="changeGlobalLanguage('hy')" id="btn-hy">🇦🇲 HY</button>
+      <button class="switch-btn" onclick="changeGlobalLanguage('ru')" id="btn-ru">🇷🇺 RU</button>
+      <button class="switch-btn" onclick="changeGlobalLanguage('en')" id="btn-en">🇺🇸 EN</button>
+    </div>
+  </div>
+
+  <h3 class="page-title" id="pageTitle">✨ Պատվերի ձևակերպում</h3>
+  <p class="page-subtitle" id="pageSubtitle">Լրացրեք բոլոր դաշտերը հրավիրատոմսի ամբողջական պատրաստման համար</p>
+
+  <form id="orderForm">
+
+    <!-- ===== SECTION 1: ԿՈՆՏԱԿՏԱՅԻՆ ՏՎՅԱԼՆԵՐ ===== -->
+    <div class="form-section-block">
+      <div class="section-block-title"><span id="step1Num">1</span> <span id="step1Title">Կոնտակտային տվյալներ</span></div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="clientName" id="lblClientName">Անուն Ազգանուն *</label>
+          <input type="text" id="clientName" class="form-control" placeholder="Օրինակ՝ Արամ Թորոսյան" required>
+        </div>
+        <div class="form-group">
+          <label for="clientPhone" id="lblClientPhone">Հեռախոսահամար *</label>
+          <input type="tel" id="clientPhone" class="form-control" placeholder="+374 99 459674" required>
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="clientEmail" id="lblClientEmail">Էլ. հասցե</label>
+          <input type="email" id="clientEmail" class="form-control" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="invitationName" id="lblSelectedModel">Ընտրված մոդել *</label>
+          <div id="invitationModelContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 2: ՄԻՋՈՑԱՌՄԱՆ ՀԻՄՆԱԿԱՆ ՏՎՅԱԼՆԵՐ ===== -->
+    <div class="form-section-block">
+      <div class="section-block-title"><span id="step2Num">2</span> <span id="step2Title">Միջոցառման հիմնական տվյալներ</span></div>
+      <div class="form-group">
+        <label for="eventName" id="lblEventName">Միջոցառման անվանումը *</label>
+        <input type="text" id="eventName" class="form-control" placeholder="Օրինակ՝ Արամի և Աննայի հարսանիք" required>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="eventType" id="lblEventType">Միջոցառման տեսակը *</label>
+          <select id="eventType" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <label for="eventDate" id="lblEventDate">Ամսաթիվ *</label>
+          <input type="date" id="eventDate" class="form-control" required>
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="eventTime" id="lblEventTime">Սկզբի ժամը *</label>
+          <input type="time" id="eventTime" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="guestCount" id="lblGuestCount">Հյուրերի քանակը</label>
+          <input type="number" id="guestCount" class="form-control" placeholder="Օրինակ՝ 120" min="1">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 3: ՎԱՅՐԵՐ ԵՎ ԼԵԶՈՒ ===== -->
+    <div class="form-section-block">
+      <div class="section-block-title"><span id="step3Num">3</span> <span id="step3Title">Վայրեր և լեզու</span></div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="churchName" id="lblChurchName">Եկեղեցու անվանում</label>
+          <input type="text" id="churchName" class="form-control" placeholder="Օրինակ՝ Սուրբ Զորավոր եկեղեցի">
+        </div>
+        <div class="form-group">
+          <label for="eventLocation" id="lblEventLocation">Ռեստորանի անվանումը *</label>
+          <input type="text" id="eventLocation" class="form-control" placeholder="Օրինակ՝ Թումանյան 13" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="eventLocationAddress" id="lblEventLocationAddress">Ռեստորանի հասցեն</label>
+        <input type="text" id="eventLocationAddress" class="form-control" placeholder="Օրինակ՝ Երևան, Թումանյան փող. 13">
+      </div>
+      <div class="form-group">
+        <label id="lblEventLanguages">Հրավիրատոմսի լեզուները *</label>
+        <div class="language-selector-group">
+          <input type="radio" id="langHy" name="eventLanguage" value="Հայերեն" checked hidden>
+          <label for="langHy" class="lang-btn" id="lblLangHy">Հայերեն</label>
+          <input type="radio" id="langRu" name="eventLanguage" value="Русский" hidden>
+          <label for="langRu" class="lang-btn" id="lblLangRu">Русский</label>
+          <input type="radio" id="langEn" name="eventLanguage" value="English" hidden>
+          <label for="langEn" class="lang-btn" id="lblLangEn">English</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 4: ԴԻԶԱՅՆԻ ԵՎ ՈՃԻ ՆԱԽԱՍԻՐՈՒԹՅՈՒՆՆԵՐ ===== -->
+    <div class="form-section-block">
+      <div class="section-block-title"><span id="step4Num">4</span> <span id="step4Title">Դիզայնի և ոճի նախասիրություններ</span></div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="colorScheme" id="lblColorScheme">Գունային սխեմա</label>
+          <select id="colorScheme" class="form-control">
+            <option value="" disabled selected>Ընտրեք գույները</option>
+            <option value="Ոսկեգույն / Սև">Ոսկեգույն / Սև</option>
+            <option value="Վարդագույն / Փղոսկր">Վարդագույն / Փղոսկր</option>
+            <option value="Կանաչ / Բեժ">Կանաչ / Բեժ</option>
+            <option value="Կապույտ / Արծաթ">Կապույտ / Արծաթ</option>
+            <option value="Բորդո / Ոսկի">Բորդո / Ոսկի</option>
+            <option value="Մոխրագույն / Սպիտակ">Մոխրագույն / Սպիտակ</option>
+            <option value="Այլ">Այլ (նշեք մանրամասներում)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="styleVibe" id="lblStyleVibe">Ցանկալի տրամադրություն / ոճ</label>
+          <select id="styleVibe" class="form-control">
+            <option value="" disabled selected>Ընտրեք ոճը</option>
+            <option value="Մինիմալիստական">Մինիմալիստական</option>
+            <option value="Դասական / Ավանդական">Դասական / Ավանդական</option>
+            <option value="Ռոմանտիկ / Քնքուշ">Ռոմանտիկ / Քնքուշ</option>
+            <option value="Ժամանակակից / Թրենդային">Ժամանակակից / Թրենդային</option>
+            <option value="Շքեղ / Լյուքս">Շքեղ / Լյուքս</option>
+            <option value="Փայլուն / Գլամուր">Փայլուն / Գլամուր</option>
+            <option value="Բնական / Էկո">Բնական / Էկո</option>
+            <option value="Այլ">Այլ (նշեք մանրամասներում)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="designNotes" id="lblDesignNotes">Լրացուցիչ ցանկություններ դիզայնի համար</label>
+        <textarea id="designNotes" class="form-control" rows="2" placeholder="Օրինակ՝ ցանկանում եմ ավելացնել մեր լուսանկարը, օգտագործել կոնկրետ տառատեսակ, ավելացնել հատուկ նշաններ և այլն"></textarea>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 5: ԼՐԱՑՈՒՑԻՉ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ ԵՎ ԱՅԼ ===== -->
+    <div class="form-section-block">
+      <div class="section-block-title"><span id="step5Num">5</span> <span id="step5Title">Լրացուցիչ ծառայություններ և մանրամասներ</span></div>
+
+      <div class="toggle-service-item">
+        <div class="service-info">
+          <span class="service-icon">🎵</span>
+          <span class="service-label" id="srvMusic">Երաժշտություն (+1000 ֏)</span>
+        </div>
+        <label class="switch-box">
+          <input type="checkbox" id="toggleMusic" class="price-modifier" data-price="1000">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+      <div class="music-input-subgroup" id="musicUrlGroup">
+        <input type="url" id="musicYoutubeUrl" class="form-control" placeholder="Տեղադրեք YouTube լինկը">
+      </div>
+
+      <div class="toggle-service-item">
+        <div class="service-info">
+          <span class="service-icon">📋</span>
+          <span class="service-label" id="srvRsvp">Հյուրերի մասնակցության հաստատում (+3000 ֏)</span>
+        </div>
+        <label class="switch-box">
+          <input type="checkbox" id="toggleRsvp" class="price-modifier" data-price="3000">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-service-item">
+        <div class="service-info">
+          <span class="service-icon">👗</span>
+          <span class="service-label" id="srvDresscode">Դրեսկոդ (+1000 ֏)</span>
+        </div>
+        <label class="switch-box">
+          <input type="checkbox" id="toggleDresscode" class="price-modifier" data-price="1000">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;">
+        <label for="additionalNotes" id="lblAdditionalNotes">Այլ մանրամասներ / հատուկ հրահանգներ</label>
+        <textarea id="additionalNotes" class="form-control" rows="3" placeholder="Նշեք ցանկացած այլ տեղեկություն, որը կարևոր է հրավիրատոմսի պատրաստման համար (օրինակ՝ առանձնահատուկ ցանկություններ, կարևոր ամսաթվեր, անակնկալներ հյուրերի համար և այլն)"></textarea>
+      </div>
+    </div>
+
+    <!-- ===== PRICE SUMMARY ===== -->
+    <div class="price-summary-block">
+      <span id="lblTotalPrice">Ընդհանուր Գումար՝</span>
+      <span class="price-summary-value" id="finalPriceDisplay">0 ֏</span>
+    </div>
+
+    <button type="submit" class="btn-submit-order" id="btnSubmitOrder">Հաստատել պատվերը</button>
+  </form>
+</div>
+
+<script>
+  // ============================================================
+  //  DATA
+  // ============================================================
+  const productsDatabase = {
+    "Flight of Love": 10000,
+    "Angels": 9500,
+    "Glowing Candles": 9900,
+    "LoveNodes": 12000,
+    "Moonshine": 13000,
+    "Magic Box": 10000,
+    "Divine Page": 10000,
+    "Elegance In Motion": 14000
+  };
+
+  let basePrice = 0;
+  let currentLang = localStorage.getItem('inviteart_lang') || 'hy';
+
+  // ============================================================
+  //  TRANSLATIONS (hy, ru, en) — կրճատված տարբերակ
+  // ============================================================
+  const dictionary = {
+    hy: {
+      siteTitle: "Պատվերի Ձևակերպում | InviteArt",
+      lnkBack: "← Վերադառնալ",
+      pageTitle: "✨ Պատվերի ձևակերպում",
+      pageSubtitle: "Լրացրեք բոլոր դաշտերը հրավիրատոմսի ամբողջական պատրաստման համար",
+      step1Title: "Կոնտակտային տվյալներ",
+      lblClientName: "Անուն Ազգանուն *",
+      phClientName: "Օրինակ՝ Արամ Թորոսյան",
+      lblClientPhone: "Հեռախոսահամար *",
+      lblClientEmail: "Էլ. հասցե",
+      lblSelectedModel: "Ընտրված մոդել *",
+      optSelectModel: "Ընտրեք հրավիրատոմսի մոդելը",
+      step2Title: "Միջոցառման հիմնական տվյալներ",
+      lblEventName: "Միջոցառման անվանումը *",
+      phEventName: "Օրինակ՝ Արամի և Աննայի հարսանիք",
+      lblEventType: "Միջոցառման տեսակը *",
+      eventTypes: { wedding: "Հարսանիք", baptism: "Կնունք", birthday: "Ծնունդ", other: "Այլ միջոցառում" },
+      lblEventDate: "Ամսաթիվ *",
+      lblEventTime: "Սկզբի ժամը *",
+      lblGuestCount: "Հյուրերի քանակը",
+      phGuestCount: "Օրինակ՝ 120",
+      step3Title: "Վայրեր և լեզու",
+      lblChurchName: "Եկեղեցու անվանում",
+      phChurchName: "Օրինակ՝ Սուրբ Զորավոր եկեղեցի",
+      lblEventLocation: "Ռեստորանի անվանումը *",
+      phEventLocation: "Օրինակ՝ Թումանյան 13",
+      lblEventLocationAddress: "Ռեստորանի հասցեն",
+      phEventLocationAddress: "Օրինակ՝ Երևան, Թումանյան փող. 13",
+      lblEventLanguages: "Հրավիրատոմսի լեզուները *",
+      lblLangHy: "Հայերեն", valLangHy: "Հայերեն",
+      lblLangRu: "Русский", valLangRu: "Русский",
+      lblLangEn: "English", valLangEn: "English",
+      step4Title: "Դիզայնի և ոճի նախասիրություններ",
+      lblColorScheme: "Գունային սխեմա",
+      lblStyleVibe: "Ցանկալի տրամադրություն / ոճ",
+      lblDesignNotes: "Լրացուցիչ ցանկություններ դիզայնի համար",
+      phDesignNotes: "Օրինակ՝ ցանկանում եմ ավելացնել մեր լուսանկարը, օգտագործել կոնկրետ տառատեսակ...",
+      step5Title: "Լրացուցիչ ծառայություններ և մանրամասներ",
+      srvMusic: "Երաժշտություն (+1000 ֏)",
+      phMusic: "Տեղադրեք YouTube լինկը",
+      srvRsvp: "Հյուրերի մասնակցության հաստատում (+3000 ֏)",
+      srvDresscode: "Դրեսկոդ (+1000 ֏)",
+      lblAdditionalNotes: "Այլ մանրամասներ / հատուկ հրահանգներ",
+      phAdditionalNotes: "Նշեք ցանկացած այլ տեղեկություն...",
+      lblTotalPrice: "Ընդհանուր Գումար՝",
+      btnSubmitOrder: "Հաստատել պատվերը",
+      alertNoModel: "Խնդրում ենք ընտրել հրավիրատոմսի մոդելը:",
+      alertSuccess: "👑 Շնորհակալություն: Ձեր պատվերը հաջողությամբ ուղարկվեց:\nԸնդհանուր գումար՝ ",
+      alertError: "Ցավոք, սխալ տեղի ունեցավ: Խնդրում ենք փորձել կրկին:",
+      tgLabels: {
+        main: "ՆՈՐ ՊԱՏՎԵՐ",
+        model: "Մոդել",
+        price: "Վերջնական Գին",
+        client: "Հաճախորդ",
+        phone: "Հեռախոս",
+        email: "Էլ. հասցե",
+        event: "ՄԻՋՈՑԱՌՈՒՄ",
+        eventName: "Անվանում",
+        type: "Տեսակ",
+        date: "Ամսաթիվ",
+        time: "Ժամ",
+        guests: "Հյուրերի քանակ",
+        church: "Եկեղեցի",
+        restaurant: "Ռեստորան",
+        address: "Հասցե",
+        lang: "Լեզու",
+        color: "Գույներ",
+        style: "Ոճ",
+        design: "Դիզայնի ցանկություններ",
+        extra: "ԼՐԱՑՈՒՑԻՉ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ",
+        music: "Երաժշտություն",
+        rsvp: "Հյուրերի հաստատում",
+        dress: "Դրեսկոդ",
+        notes: "Այլ մանրամասներ",
+        contact: "Անհրաժեշտ է կապ հաստատել:",
+        yes: "Այո",
+        no: "Ոչ",
+        none: "Նշված չէ",
+        empty: "Չկան"
+      }
+    },
+    ru: {
+      siteTitle: "Оформление Заказа | InviteArt",
+      lnkBack: "← Вернуться",
+      pageTitle: "✨ Оформление заказа",
+      pageSubtitle: "Заполните все поля для полной подготовки пригласительного",
+      step1Title: "Контактные данные",
+      lblClientName: "Имя Фамилия *",
+      phClientName: "Например: Арам Торосян",
+      lblClientPhone: "Номер телефона *",
+      lblClientEmail: "Эл. почта",
+      lblSelectedModel: "Выбранная модель *",
+      optSelectModel: "Выберите модель пригласительного",
+      step2Title: "Основные данные мероприятия",
+      lblEventName: "Название мероприятия *",
+      phEventName: "Например: Свадьба Арама и Анны",
+      lblEventType: "Тип мероприятия *",
+      eventTypes: { wedding: "Свадьба", baptism: "Крестины", birthday: "День рождения", other: "Другое мероприятие" },
+      lblEventDate: "Дата *",
+      lblEventTime: "Время начала *",
+      lblGuestCount: "Количество гостей",
+      phGuestCount: "Например: 120",
+      step3Title: "Места и язык",
+      lblChurchName: "Название церкви",
+      phChurchName: "Например: Церковь Святого Зоравора",
+      lblEventLocation: "Название ресторана *",
+      phEventLocation: "Например: Туманян 13",
+      lblEventLocationAddress: "Адрес ресторана",
+      phEventLocationAddress: "Например: Ереван, ул. Туманяна 13",
+      lblEventLanguages: "Языки пригласительного *",
+      lblLangHy: "Армянский", valLangHy: "Армянский",
+      lblLangRu: "Русский", valLangRu: "Русский",
+      lblLangEn: "Английский", valLangEn: "Английский",
+      step4Title: "Дизайн и стиль",
+      lblColorScheme: "Цветовая схема",
+      lblStyleVibe: "Желаемое настроение / стиль",
+      lblDesignNotes: "Дополнительные пожелания по дизайну",
+      phDesignNotes: "Например: добавить наше фото, использовать конкретный шрифт...",
+      step5Title: "Дополнительные услуги и детали",
+      srvMusic: "Музыка (+1000 ֏)",
+      phMusic: "Вставьте ссылку на YouTube",
+      srvRsvp: "Подтверждение присутствия гостей (+3000 ֏)",
+      srvDresscode: "Дресс-код (+1000 ֏)",
+      lblAdditionalNotes: "Другие детали / особые инструкции",
+      phAdditionalNotes: "Укажите любую другую информацию...",
+      lblTotalPrice: "Итоговая сумма:",
+      btnSubmitOrder: "Подтвердить заказ",
+      alertNoModel: "Пожалуйста, выберите модель пригласительного:",
+      alertSuccess: "👑 Спасибо! Ваш заказ успешно отправлен.\nИтоговая сумма: ",
+      alertError: "К сожалению, произошла ошибка. Пожалуйста, попробуйте еще раз.",
+      tgLabels: {
+        main: "НОВЫЙ ЗАКАЗ",
+        model: "Модель",
+        price: "Итоговая Цена",
+        client: "Клиент",
+        phone: "Телефон",
+        email: "Эл. почта",
+        event: "МЕРОПРИЯТИЕ",
+        eventName: "Название",
+        type: "Тип",
+        date: "Дата",
+        time: "Время",
+        guests: "Кол-во гостей",
+        church: "Церковь",
+        restaurant: "Ресторан",
+        address: "Адрес",
+        lang: "Язык",
+        color: "Цвета",
+        style: "Стиль",
+        design: "Пожелания по дизайну",
+        extra: "ДОП. УСЛУГИ",
+        music: "Музыка",
+        rsvp: "Подтверждение гостей",
+        dress: "Дресс-код",
+        notes: "Другие детали",
+        contact: "Необходимо связаться:",
+        yes: "Да",
+        no: "Нет",
+        none: "Не указано",
+        empty: "Нет"
+      }
+    },
+    en: {
+      siteTitle: "Checkout | InviteArt",
+      lnkBack: "← Back",
+      pageTitle: "✨ Place Your Order",
+      pageSubtitle: "Fill in all fields for complete invitation preparation",
+      step1Title: "Contact Details",
+      lblClientName: "Full Name *",
+      phClientName: "e.g., Aram Torosyan",
+      lblClientPhone: "Phone Number *",
+      lblClientEmail: "Email Address",
+      lblSelectedModel: "Selected Model *",
+      optSelectModel: "Select invitation model",
+      step2Title: "Event Details",
+      lblEventName: "Event Name *",
+      phEventName: "e.g., Wedding of Aram and Anna",
+      lblEventType: "Event Type *",
+      eventTypes: { wedding: "Wedding", baptism: "Baptism", birthday: "Birthday", other: "Other Event" },
+      lblEventDate: "Date *",
+      lblEventTime: "Start Time *",
+      lblGuestCount: "Number of Guests",
+      phGuestCount: "e.g., 120",
+      step3Title: "Venues & Language",
+      lblChurchName: "Church Name",
+      phChurchName: "e.g., St. Zoravor Church",
+      lblEventLocation: "Restaurant Name *",
+      phEventLocation: "e.g., Tumanyan 13",
+      lblEventLocationAddress: "Restaurant Address",
+      phEventLocationAddress: "e.g., Yerevan, Tumanyan St. 13",
+      lblEventLanguages: "Invitation Languages *",
+      lblLangHy: "Armenian", valLangHy: "Armenian",
+      lblLangRu: "Russian", valLangRu: "Russian",
+      lblLangEn: "English", valLangEn: "English",
+      step4Title: "Design & Style Preferences",
+      lblColorScheme: "Color Scheme",
+      lblStyleVibe: "Desired Mood / Style",
+      lblDesignNotes: "Additional Design Requests",
+      phDesignNotes: "e.g., add our photo, use a specific font...",
+      step5Title: "Extra Services & Details",
+      srvMusic: "Background Music (+1000 ֏)",
+      phMusic: "Paste YouTube link here",
+      srvRsvp: "RSVP Guest Confirmation (+3000 ֏)",
+      srvDresscode: "Dress Code (+1000 ֏)",
+      lblAdditionalNotes: "Other Details / Special Instructions",
+      phAdditionalNotes: "Specify any other information...",
+      lblTotalPrice: "Total Price:",
+      btnSubmitOrder: "Confirm Order",
+      alertNoModel: "Please select an invitation model:",
+      alertSuccess: "👑 Thank you! Your order has been placed successfully.\nTotal Amount: ",
+      alertError: "Sorry, something went wrong. Please try again.",
+      tgLabels: {
+        main: "NEW ORDER",
+        model: "Model",
+        price: "Final Price",
+        client: "Client",
+        phone: "Phone",
+        email: "Email",
+        event: "EVENT",
+        eventName: "Name",
+        type: "Type",
+        date: "Date",
+        time: "Time",
+        guests: "Guest Count",
+        church: "Church",
+        restaurant: "Restaurant",
+        address: "Address",
+        lang: "Language",
+        color: "Colors",
+        style: "Style",
+        design: "Design Requests",
+        extra: "EXTRA SERVICES",
+        music: "Music",
+        rsvp: "RSVP Confirmation",
+        dress: "Dress Code",
+        notes: "Other Details",
+        contact: "Need to contact customer:",
+        yes: "Yes",
+        no: "No",
+        none: "Not specified",
+        empty: "None"
+      }
+    }
+  };
+
+  // ============================================================
+  //  LANGUAGE CHANGE
+  // ============================================================
+  function changeGlobalLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('inviteart_lang', lang);
+    document.querySelectorAll('.lang-switcher-global .switch-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`btn-${lang}`).classList.add('active');
+
+    const t = dictionary[lang];
+    for (let key in t) {
+      const el = document.getElementById(key);
+      if (el) {
+        if (key === 'phClientName') document.getElementById('clientName').placeholder = t[key];
+        else if (key === 'phEventName') document.getElementById('eventName').placeholder = t[key];
+        else if (key === 'phEventLocation') document.getElementById('eventLocation').placeholder = t[key];
+        else if (key === 'phEventLocationAddress') document.getElementById('eventLocationAddress').placeholder = t[key];
+        else if (key === 'phGuestCount') document.getElementById('guestCount').placeholder = t[key];
+        else if (key === 'phChurchName') document.getElementById('churchName').placeholder = t[key];
+        else if (key === 'phDesignNotes') document.getElementById('designNotes').placeholder = t[key];
+        else if (key === 'phAdditionalNotes') document.getElementById('additionalNotes').placeholder = t[key];
+        else if (key === 'phMusic') document.getElementById('musicYoutubeUrl').placeholder = t[key];
+        else if (key === 'siteTitle') document.title = t[key];
+        else if (key === 'pageTitle' || key === 'pageSubtitle' || key === 'lnkBack' ||
+                 key === 'step1Title' || key === 'step2Title' || key === 'step3Title' ||
+                 key === 'step4Title' || key === 'step5Title' ||
+                 key === 'lblClientName' || key === 'lblClientPhone' || key === 'lblClientEmail' ||
+                 key === 'lblSelectedModel' || key === 'lblEventName' || key === 'lblEventType' ||
+                 key === 'lblEventDate' || key === 'lblEventTime' || key === 'lblGuestCount' ||
+                 key === 'lblChurchName' || key === 'lblEventLocation' || key === 'lblEventLocationAddress' ||
+                 key === 'lblEventLanguages' || key === 'lblColorScheme' || key === 'lblStyleVibe' ||
+                 key === 'lblDesignNotes' || key === 'lblAdditionalNotes' ||
+                 key === 'lblTotalPrice' || key === 'btnSubmitOrder' ||
+                 key === 'srvMusic' || key === 'srvRsvp' || key === 'srvDresscode' ||
+                 key === 'lblLangHy' || key === 'lblLangRu' || key === 'lblLangEn' ||
+                 key === 'optSelectModel') {
+          el.innerText = t[key];
+        }
+      }
+    }
+
+    // Update radio values
+    document.getElementById('langHy').value = t.valLangHy;
+    document.getElementById('langRu').value = t.valLangRu;
+    document.getElementById('langEn').value = t.valLangEn;
+
+    // Rebuild event type select
+    const eventTypeSelect = document.getElementById('eventType');
+    const currentVal = eventTypeSelect.value || 'wedding';
+    eventTypeSelect.innerHTML = `
+      <option value="wedding">${t.eventTypes.wedding}</option>
+      <option value="baptism">${t.eventTypes.baptism}</option>
+      <option value="birthday">${t.eventTypes.birthday}</option>
+      <option value="other">${t.eventTypes.other}</option>
+    `;
+    eventTypeSelect.value = currentVal;
+
+    updateModelContainer(t);
+  }
+
+  // ============================================================
+  //  MODEL CONTAINER
+  // ============================================================
+  function updateModelContainer(t) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const modelName = urlParams.get('model');
+    const container = document.getElementById('invitationModelContainer');
+
+    if (modelName) {
+      const decodedName = decodeURIComponent(modelName);
+      container.innerHTML = `<input type="text" id="invitationName" class="form-control disabled-input" value="${decodedName}" readonly>`;
+      basePrice = productsDatabase[decodedName] || 0;
+    } else {
+      const currentSelected = document.getElementById('invitationName') ? document.getElementById('invitationName').value : '';
+      let selectHtml = `<select id="invitationName" class="form-control" required>`;
+      selectHtml += `<option value="" disabled ${!currentSelected ? 'selected' : ''}>${t.optSelectModel}</option>`;
+      for (const key in productsDatabase) {
+        selectHtml += `<option value="${key}" ${currentSelected === key ? 'selected' : ''}>${key} (${productsDatabase[key].toLocaleString()} ֏)</option>`;
+      }
+      selectHtml += `</select>`;
+      container.innerHTML = selectHtml;
+      const selectEl = document.getElementById('invitationName');
+      if (selectEl) {
+        selectEl.addEventListener('change', function() {
+          basePrice = productsDatabase[this.value] || 0;
+          calculateTotalPrice();
+        });
+        if (currentSelected && productsDatabase[currentSelected]) basePrice = productsDatabase[currentSelected];
+      }
+    }
+    calculateTotalPrice();
+  }
+
+  // ============================================================
+  //  PRICE CALCULATOR
+  // ============================================================
+  function calculateTotalPrice() {
+    let extra = 0;
+    document.querySelectorAll('.price-modifier').forEach(cb => {
+      if (cb.checked) extra += parseInt(cb.getAttribute('data-price')) || 0;
+    });
+    const total = basePrice + extra;
+    document.getElementById('finalPriceDisplay').innerText = total.toLocaleString() + ' ֏';
+    return total;
+  }
+
+  document.querySelectorAll('.price-modifier').forEach(cb => {
+    cb.addEventListener('change', calculateTotalPrice);
+  });
+
+  // ============================================================
+  //  MUSIC TOGGLE
+  // ============================================================
+  const toggleMusic = document.getElementById('toggleMusic');
+  const musicUrlGroup = document.getElementById('musicUrlGroup');
+  if (toggleMusic && musicUrlGroup) {
+    toggleMusic.addEventListener('change', function() {
+      if (this.checked) musicUrlGroup.classList.add('active');
+      else {
+        musicUrlGroup.classList.remove('active');
+        document.getElementById('musicYoutubeUrl').value = '';
+      }
+    });
+  }
+
+  // ============================================================
+  //  FORM SUBMIT → TELEGRAM
+  // ============================================================
+  const BOT_TOKEN = "8877618760:AAF7SaaXiLGTX0OIT5KqRvIR_u-9y6PxbCU";
+  const CHAT_ID = "8420912358";
+
+  document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const t = dictionary[currentLang];
+    const lbl = t.tgLabels;
+
+    const modelEl = document.getElementById('invitationName');
+    const model = modelEl ? modelEl.value : '';
+    if (!model) { alert(t.alertNoModel); return; }
+
+    const name = document.getElementById('clientName').value.trim() || lbl.none;
+    const phone = document.getElementById('clientPhone').value.trim() || lbl.none;
+    const email = document.getElementById('clientEmail').value.trim() || lbl.none;
+    const eventName = document.getElementById('eventName').value.trim() || lbl.none;
+    const eventTypeSelect = document.getElementById('eventType');
+    const eventType = eventTypeSelect.options[eventTypeSelect.selectedIndex]?.text || lbl.none;
+    const eventDate = document.getElementById('eventDate').value || lbl.none;
+    const eventTime = document.getElementById('eventTime').value || lbl.none;
+    const guestCount = document.getElementById('guestCount').value || lbl.none;
+    const church = document.getElementById('churchName').value.trim() || lbl.none;
+    const restaurant = document.getElementById('eventLocation').value.trim() || lbl.none;
+    const address = document.getElementById('eventLocationAddress').value.trim() || lbl.none;
+    const language = document.querySelector('input[name="eventLanguage"]:checked')?.value || lbl.none;
+    const colorScheme = document.getElementById('colorScheme').value || lbl.none;
+    const styleVibe = document.getElementById('styleVibe').value || lbl.none;
+    const designNotes = document.getElementById('designNotes').value.trim() || lbl.empty;
+    const extraNotes = document.getElementById('additionalNotes').value.trim() || lbl.empty;
+
+    const isMusic = document.getElementById('toggleMusic').checked;
+    const musicUrl = document.getElementById('musicYoutubeUrl').value.trim();
+    const musicStatus = isMusic ? `✅ ${lbl.yes}${musicUrl ? ` (${musicUrl})` : ''}` : `❌ ${lbl.no}`;
+    const rsvpStatus = document.getElementById('toggleRsvp').checked ? `✅ ${lbl.yes}` : `❌ ${lbl.no}`;
+    const dressStatus = document.getElementById('toggleDresscode').checked ? `✅ ${lbl.yes}` : `❌ ${lbl.no}`;
+
+    const totalAmount = document.getElementById('finalPriceDisplay').innerText;
+
+    let text = `👑 *${lbl.main} (InviteArt)* 👑\n\n`;
+    text += `🎴 *${lbl.model}:* ${model}\n`;
+    text += `💰 *${lbl.price}:* ${totalAmount}\n\n`;
+    text += `👤 *${lbl.client}:* ${name}\n`;
+    text += `📞 *${lbl.phone}:* ${phone}\n`;
+    text += `📧 *${lbl.email}:* ${email}\n\n`;
+    text += `📅 *${lbl.event}*\n`;
+    text += `📛 *${lbl.eventName}:* ${eventName}\n`;
+    text += `🔹 *${lbl.type}:* ${eventType}\n`;
+    text += `📆 *${lbl.date}:* ${eventDate}\n`;
+    text += `🕐 *${lbl.time}:* ${eventTime}\n`;
+    text += `👥 *${lbl.guests}:* ${guestCount}\n`;
+    text += `⛪ *${lbl.church}:* ${church}\n`;
+    text += `🏛️ *${lbl.restaurant}:* ${restaurant}\n`;
+    text += `📍 *${lbl.address}:* ${address}\n`;
+    text += `🗣️ *${lbl.lang}:* ${language}\n\n`;
+    text += `🎨 *Design / Style*\n`;
+    text += `🎨 *${lbl.color}:* ${colorScheme}\n`;
+    text += `✨ *${lbl.style}:* ${styleVibe}\n`;
+    text += `📝 *${lbl.design}:* ${designNotes}\n\n`;
+    text += `💎 *${lbl.extra}*\n`;
+    text += `🎵 *${lbl.music}:* ${musicStatus}\n`;
+    text += `📋 *${lbl.rsvp}:* ${rsvpStatus}\n`;
+    text += `👗 *${lbl.dress}:* ${dressStatus}\n\n`;
+    text += `📌 *${lbl.notes}:* ${extraNotes}\n\n`;
+    text += `🚀 *${lbl.contact}*`;
+
+    try {
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "Markdown" })
+      });
+      alert(`${t.alertSuccess}${totalAmount}`);
+      window.location.href = "catalog.html";
+    } catch (err) {
+      alert(t.alertError);
+      console.error(err);
+    }
+  });
+
+  // ============================================================
+  //  INIT
+  // ============================================================
+  window.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('eventDate');
+    if (dateInput) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      dateInput.value = tomorrow.toISOString().split('T')[0];
+    }
+    changeGlobalLanguage(currentLang);
+  });
+</script>
+
+</body>
+</html>

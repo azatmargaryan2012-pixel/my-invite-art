@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Հետադարձ կապ - InviteArt.am</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ========== RESET & GLOBAL ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-cream: #fefaf5;
+      --primary-dark: #2e2824;
+      --gold: #c7a252;
+      --gold-light: #e8d6b5;
+      --card-white: #ffffff;
+      --soft-shadow: 0 20px 40px -15px rgba(46, 40, 36, 0.1);
+      --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      --font-serif: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #ffffff;
+      color: var(--primary-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ========== HEADER & NAV ========== */
+    .main-header {
+      width: 100%;
+      padding: 20px 40px;
+      background: rgba(255, 253, 250, 0.95);
+      backdrop-filter: blur(15px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(199, 162, 82, 0.15);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transition: var(--transition-smooth);
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #2e2824 0%, #c7a252 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ========== LANGUAGE SWITCHER ========== */
+    .lang-switcher {
+      display: flex;
+      background: rgba(46, 40, 36, 0.04);
+      border: 1px solid rgba(199, 162, 82, 0.2);
+      border-radius: 30px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      cursor: pointer;
+      border-radius: 20px;
+      transition: var(--transition-smooth);
+    }
+
+    .lang-btn:hover {
+      color: var(--gold);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, #ebdcb9 0%, #c7a252 100%);
+      color: var(--primary-dark);
+      box-shadow: 0 2px 6px rgba(199, 162, 82, 0.2);
+    }
+
+    /* MOBILE MENU TOGGLE */
+    .menu-toggle {
+      display: none;
+      background: rgba(199, 162, 82, 0.08);
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--primary-dark);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========== CONTACT MAIN CONTENT ========== */
+    .contact-main-content {
+      flex: 1;
+      background: linear-gradient(180deg, #fdf6ee 0%, #ffffff 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--card-white);
+      padding: 50px 40px;
+      border-radius: 32px;
+      box-shadow: var(--soft-shadow);
+      border: 1px solid rgba(240, 235, 230, 0.7);
+      max-width: 500px;
+      width: 100%;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(199, 162, 82, 0.2);
+    }
+
+    .icon-wrapper {
+      width: 70px;
+      height: 70px;
+      background: #fdfaf5;
+      border: 1px solid var(--gold-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      color: var(--gold);
+      font-size: 1.8rem;
+    }
+
+    .contact-title {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .contact-phone {
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      display: block;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-phone:hover {
+      color: var(--gold);
+    }
+
+    .contact-location {
+      font-size: 1rem;
+      color: #7e6e62;
+      letter-spacing: 0.5px;
+      margin-bottom: 35px;
+    }
+
+    /* SOCIAL BUTTONS */
+    .social-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+      transition: var(--transition-smooth);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ========== SITE FOOTER ========== */
+    .site-footer {
+      background: #fdfaf6;
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid #f3ebd8;
+    }
+
+    .footer-copyright {
+      font-size: 0.85rem;
+      color: #9f8b78;
+      line-height: 1.6;
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 83px;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        gap: 20px;
+        border-bottom: 1px solid rgba(199, 162, 82, 0.15);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .contact-title {
+        font-size: 1.9rem;
+      }
+
+      .contact-phone {
+        font-size: 1.4rem;
+      }
+
+      .contact-card {
+        padding: 40px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <nav class="nav-container">
+      <button class="menu-toggle" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+      
+      <a href="index.html" class="logo-container">
+        <span class="brand-name">InviteArt</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" id="navAbout">Մեր մասին</a>
+        <a href="catalog.html" id="navCatalog">Հրավիրատոմսեր</a>
+        <a href="contact.html" class="active" id="navContact">Հետադարձ կապ</a>
+      </div>
+
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="changeLanguage('hy')" id="btn-hy">🇦🇲 HY</button>
+        <button class="lang-btn" onclick="changeLanguage('ru')" id="btn-ru">🇷🇺 RU</button>
+        <button class="lang-btn" onclick="changeLanguage('en')" id="btn-en">🇺🇸 EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="contact-main-content">
+    <div class="contact-card">
+      <div class="icon-wrapper">
+        <i class="fa-regular fa-envelope-open"></i>
+      </div>
+      <h1 class="contact-title" id="contactTitle">Հետադարձ կապ</h1>
+      <a href="tel:+37498002690" class="contact-phone">+374 98 00 26 90</a>
+      <p class="contact-location" id="contactLocation">Երևան, Հայաստան</p>
+      
+      <div class="social-grid">
+        <a href="https://instagram.com/inviteart.am" target="_blank" class="social-btn" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);"><i class="fab fa-instagram"></i></a>
+        <a href="https://t.me/+SIRvplypwyI4YTAy" target="_blank" class="social-btn" style="background: #229ED9;"><i class="fab fa-telegram"></i></a>
+        <a href="https://wa.me/37498002690" target="_blank" class="social-btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-copyright" id="footerCopy">© 2026 InviteArt — էլեգանտ հրավերներ<br>Պատրաստված սիրով և ոգեշնչմամբ</p>
+  </footer>
+
+  <script>
+    // --------------------- ԼԵԶՈՒՆԵՐԻ ԲԱԶԱ -------------------------
+    let currentLang = localStorage.getItem('inviteart_lang') || 'hy';
+
+    const translations = {
+      hy: {
+        navAbout: "Մեր մասին",
+        navCatalog: "Հրավիրատոմսեր",
+        navContact: "Հետադարձ կապ",
+        contactTitle: "Հետադարձ կապ",
+        contactLocation: "Երևան, Հայաստան",
+        footerCopy: "© 2026 InviteArt — էլեգանտ հրավերներ<br>Պատրաստված սիրով և ոգեշնչմամբ"
+      },
+      ru: {
+        navAbout: "О нас",
+        navCatalog: "Пригласительные",
+        navContact: "Контакты",
+        contactTitle: "Обратная связь",
+        contactLocation: "Ереван, Армения",
+        footerCopy: "© 2026 InviteArt — элегантные приглашения<br>Сделано с любовью и вдохновением"
+      },
+      en: {
+        navAbout: "About Us",
+        navCatalog: "Invitations",
+        navContact: "Contact",
+        contactTitle: "Contact Us",
+        contactLocation: "Yerevan, Armenia",
+        footerCopy: "© 2026 InviteArt — elegant invitations<br>Made with love and inspiration"
+      }
+    };
+
+    // ԼԵԶՎԻ ՓՈԽՄԱՆ ՖՈՒՆԿՑԻԱ
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('inviteart_lang', lang);
+      
+      // Ակտիվացնել սեղմված կոճակը
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`btn-${lang}`).classList.add('active');
+
+      // Թարգմանել բոլոր տարրերը
+      const t = translations[lang];
+      for (let key in t) {
+        const el = document.getElementById(key);
+        if (el) {
+          el.innerHTML = t[key];
+        }
+      }
+    }
+
+    // ՄՈԲԱՅԼ ՄԵՆՅՈՒԻ ՏՈԳԼ
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => { 
+      navLinks.classList.toggle('active'); 
+    });
+
+    // Էջը բեռնվելիս սահմանել ընթացիկ լեզուն
+    window.onload = () => {
+      changeLanguage(currentLang);
+    }
+  </script>
+</body>
+</html>

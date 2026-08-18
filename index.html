@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <title>InviteArt.am | Էլեկտրոնային Հրավիրատոմսեր</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ===== 1. RESET & ROOT ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #faf7f2;
+            --bg-soft: #f5efe8;
+            --primary: #2c241e;
+            --primary-light: #4a3d35;
+            --accent: #c9a84c;
+            --accent-light: #e8d5a3;
+            --accent-glow: rgba(201, 168, 76, 0.25);
+            --card: #ffffff;
+            --text: #2c241e;
+            --text-secondary: #6b5f56;
+            --text-muted: #9a8e85;
+            --border: rgba(44, 36, 30, 0.06);
+            --shadow-sm: 0 2px 12px rgba(44, 36, 30, 0.04);
+            --shadow-md: 0 8px 32px rgba(44, 36, 30, 0.07);
+            --shadow-lg: 0 20px 60px rgba(44, 36, 30, 0.10);
+            --shadow-xl: 0 40px 80px rgba(44, 36, 30, 0.12);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --radius-full: 60px;
+            --transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-serif: 'Playfair Display', 'Georgia', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            --header-height: 72px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== FIXED HEADER OFFSET FOR ANCHOR LINKS ===== */
+        section[id],
+        .benefits-section,
+        .how-to-order-section,
+        .catalog-top-section,
+        .pricing-section,
+        .featured-section {
+            scroll-margin-top: calc(var(--header-height) + 16px);
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        a,
+        button {
+            cursor: pointer;
+            touch-action: manipulation;
+            text-decoration: none;
+            color: inherit;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        /* ===== 2. SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        /* ===== 3. HEADER ===== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(250, 247, 242, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .main-header.scrolled {
+            background: rgba(250, 247, 242, 0.96);
+            box-shadow: 0 1px 20px rgba(44, 36, 30, 0.04);
+        }
+
+        .nav-container {
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .site-logo {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 40%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-left,
+        .nav-right {
+            display: none;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-left a,
+        .nav-right a {
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-left a::after,
+        .nav-right a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-left a:hover::after,
+        .nav-right a:hover::after,
+        .nav-left a.active::after,
+        .nav-right a.active::after {
+            width: 100%;
+        }
+
+        .nav-left a:hover,
+        .nav-right a:hover,
+        .nav-left a.active,
+        .nav-right a.active {
+            color: var(--primary);
+        }
+
+        .mobile-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            background: rgba(44, 36, 30, 0.04);
+            padding: 3px 4px;
+            border-radius: 30px;
+        }
+
+        .lang-btn {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: transparent;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .lang-btn.active {
+            opacity: 1;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .lang-btn:active {
+            transform: scale(0.92);
+        }
+
+        .burger-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: var(--transition);
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        .burger-menu:active {
+            background: rgba(44, 36, 30, 0.04);
+        }
+
+        .burger-menu span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
+            transform-origin: center;
+        }
+
+        .burger-menu.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+            width: 24px;
+        }
+        .burger-menu.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+            width: 0;
+        }
+        .burger-menu.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+            width: 24px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            background: rgba(250, 247, 242, 0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 12px 40px rgba(44, 36, 30, 0.05);
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu-overlay.active {
+            max-height: 460px;
+            opacity: 1;
+            pointer-events: auto;
+            padding: 20px 20px 28px;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mobile-menu-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .mobile-menu-links a:active {
+            background: rgba(201, 168, 76, 0.08);
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .mobile-menu-links a i {
+            width: 22px;
+            color: var(--accent);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* ===== 4. HERO ===== */
+        .hero-section {
+            padding: 24px 20px 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -20%;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1320px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.12);
+            color: var(--accent);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .brand-title {
+            display: none;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: 2.1rem;
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .hero-subtitle span {
+            color: var(--accent);
+            position: relative;
+        }
+
+        .hero-subtitle span::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-light);
+            border-radius: 4px;
+            opacity: 0.4;
+        }
+
+        .hero-tagline {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-main-order {
+            display: inline-block;
+            padding: 16px 44px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(44, 36, 30, 0.15);
+            touch-action: manipulation;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-main-order:active {
+            transform: scale(0.96);
+        }
+
+        .btn-main-order:hover {
+            background: transparent;
+            color: var(--primary);
+            box-shadow: 0 8px 30px rgba(44, 36, 30, 0.05);
+        }
+
+        .btn-main-outline {
+            display: inline-block;
+            padding: 14px 32px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+
+        .btn-main-outline:active {
+            transform: scale(0.96);
+        }
+
+        .btn-main-outline:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .hero-phone-display {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .hero-phone-display::before {
+            content: '';
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseGlow 6s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .hero-phone-frame {
+            width: 100%;
+            aspect-ratio: 9 / 19;
+            max-width: 270px;
+            border: 6px solid var(--primary);
+            border-radius: 36px;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 24px 64px rgba(44, 36, 30, 0.18), 0 0 0 1px rgba(44, 36, 30, 0.04);
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .hero-phone-frame:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .hero-dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 64px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 14px;
+            z-index: 10;
+        }
+
+        .hero-screen-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-phone-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 4px;
+            background: rgba(44, 36, 30, 0.15);
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        /* ===== 5. SLOGAN ===== */
+        .slogan-section {
+            text-align: center;
+            padding: 20px 20px 48px;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .slogan-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .slogan-title::before {
+            content: '✦ ';
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        .slogan-title::after {
+            content: ' ✦';
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .slogan-text {
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .slogan-subtext {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== 6. CATEGORIES ===== */
+        .catalog-top-section {
+            background: var(--bg-soft);
+            padding: 48px 20px 56px;
+            text-align: center;
+        }
+
+        .catalog-main-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+        }
+
+        .categories-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 28px;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 140px;
+            cursor: pointer;
+            transition: var(--transition);
+            touch-action: manipulation;
+            border-radius: var(--radius);
+            padding: 8px 4px;
+        }
+
+        .category-item:active .circle-thumb {
+            transform: scale(0.94);
+        }
+
+        .circle-thumb {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 14px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .category-item:hover .circle-thumb {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .circle-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-item:hover .circle-thumb img {
+            transform: scale(1.04);
+        }
+
+        .category-item h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .category-item h4 span {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ===== 7. FEATURED ===== */
+        .featured-section {
+            padding: 48px 20px 40px;
+            text-align: center;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 28px;
+        }
+
+        .slider-wrapper {
+            margin-top: 8px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .invitation-card {
+            background: var(--card);
+            padding: 14px 12px 18px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .invitation-card:active {
+            transform: scale(0.97);
+        }
+
+        .phone-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .phone-frame {
+            width: 100%;
+            aspect-ratio: 9 / 19.5;
+            max-width: 100%;
+            border-radius: 22px;
+            border: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 4px 16px rgba(44, 36, 30, 0.06);
+        }
+
+        .phone-island {
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .screen-content-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        .badge-new {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.8px;
+            z-index: 15;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 12px 0 2px;
+            text-align: left;
+        }
+
+        .card-price {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-card {
+            flex: 1;
+            display: inline-block;
+            padding: 8px 10px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            text-align: center;
+            border-radius: var(--radius-full);
+            touch-action: manipulation;
+        }
+
+        .btn-card:active {
+            transform: scale(0.94);
+        }
+
+        .btn-view {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-view:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-order {
+            background: var(--primary);
+            color: #fff;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-order:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .view-all-container {
+            margin-top: 32px;
+        }
+
+        .btn-view-all {
+            display: inline-block;
+            padding: 12px 40px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+
+        .btn-view-all:active {
+            transform: scale(0.96);
+        }
+
+        .btn-view-all:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(44, 36, 30, 0.02);
+        }
+
+        /* ===== 8. PRICING ===== */
+        .pricing-section {
+            padding: 32px 20px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-box {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px 20px 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .pricing-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.3px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-subtitle i {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin-bottom: 32px;
+        }
+
+        .included-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .included-item i {
+            color: var(--accent);
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            width: 18px;
+            text-align: center;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border);
+            gap: 8px;
+        }
+
+        .service-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .service-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: var(--text);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .service-left i {
+            color: var(--accent);
+            font-size: 0.8rem;
+            width: 20px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .service-price {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
+        .pricing-action-container {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .btn-pricing-order {
+            display: inline-block;
+            padding: 14px 48px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: var(--radius-full);
+            touch-action: manipulation;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-pricing-order:active {
+            transform: scale(0.96);
+        }
+
+        .btn-pricing-order:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* ===== 9. BENEFITS ===== */
+        .benefits-section {
+            padding: 48px 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .benefits-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .benefits-media {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .macbook-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            filter: drop-shadow(0 12px 40px rgba(44, 36, 30, 0.06));
+        }
+
+        .macbook-screen {
+            background: #000;
+            border: 8px solid #000;
+            border-top-width: 10px;
+            border-bottom-width: 10px;
+            border-radius: 12px 12px 0 0;
+            aspect-ratio: 16 / 10;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .macbook-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 7px;
+            background: #000;
+            border-radius: 0 0 6px 6px;
+            z-index: 5;
+        }
+
+        .macbook-content {
+            width: 100%;
+            height: 100%;
+            background: #fdfbf7;
+            position: relative;
+        }
+
+        .macbook-content-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .macbook-body {
+            background: linear-gradient(to bottom, #d0d0d0 0%, #b8b8b8 100%);
+            height: 8px;
+            border-radius: 0 0 4px 4px;
+            position: relative;
+            width: 106%;
+            left: -3%;
+        }
+
+        .macbook-body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 3px;
+            background: #999;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .macbook-base {
+            background: #9a9a9a;
+            height: 3px;
+            width: 102%;
+            left: -1%;
+            position: relative;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .iphone-overlay {
+            position: absolute;
+            right: -4px;
+            bottom: 6px;
+            width: 90px;
+            height: 180px;
+            background: #000;
+            border: 4px solid #1a1a1a;
+            border-radius: 18px;
+            box-shadow: -8px 16px 32px rgba(0, 0, 0, 0.15), 0 0 0 1px #ccc;
+            overflow: hidden;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .iphone-overlay:active {
+            transform: scale(0.94);
+        }
+
+        .iphone-island {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 8px;
+            background: #000;
+            border-radius: 8px;
+            z-index: 15;
+        }
+
+        .iphone-content {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .iphone-content-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .iphone-overlay::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            z-index: 15;
+        }
+
+        .benefits-content {
+            text-align: left;
+            width: 100%;
+        }
+
+        .benefits-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .benefits-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 16px;
+        }
+
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px 14px;
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .benefit-icon {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefit-info h4 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            letter-spacing: 0.2px;
+            color: var(--primary);
+        }
+
+        .benefit-info p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .benefits-footer-text {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-top: 28px;
+            color: var(--accent);
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== 10. HOW TO ORDER ===== */
+        .how-to-order-section {
+            padding: 48px 20px 60px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 640px;
+            margin: 28px auto 0;
+        }
+
+        .step-card {
+            background: var(--card);
+            padding: 20px 18px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .messenger-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+        }
+
+        .btn-messenger {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            text-transform: uppercase;
+            touch-action: manipulation;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-messenger:active {
+            transform: scale(0.96);
+        }
+
+        .btn-messenger:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn-messenger i {
+            font-size: 1.2rem;
+        }
+
+        .floating-chat {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #fff;
+            z-index: 998;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+            animation: floatChat 3s infinite ease-in-out;
+            transition: var(--transition);
+            touch-action: manipulation;
+        }
+
+        .floating-chat:active {
+            transform: scale(0.88);
+        }
+
+        @keyframes floatChat {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-6px) scale(1.02);
+            }
+        }
+
+        /* ===== 11. STATS ===== */
+        .stats-section {
+            display: flex;
+            justify-content: center;
+            gap: 32px 48px;
+            padding: 40px 20px;
+            background: #fff;
+            text-align: center;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-box h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .stat-box p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== 12. FOOTER ===== */
+        .site-footer {
+            background: var(--primary);
+            color: #cfc6c0;
+            padding: 48px 20px 32px;
+        }
+
+        .footer-container {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .footer-main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 28px;
+            text-align: center;
+        }
+
+        .footer-brand-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .footer-brand-name {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 60%, var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: #9a8e85;
+            line-height: 1.6;
+        }
+
+        .footer-links-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 24px;
+            text-align: center;
+        }
+
+        .footer-links-block a {
+            color: #b0a59e;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            padding: 4px 0;
+        }
+
+        .footer-links-block a:active {
+            color: var(--accent-light);
+        }
+
+        .footer-links-block a:hover {
+            color: #fff;
+        }
+
+        /* ===== 13. RESPONSIVE ===== */
+
+        /* Tablets */
+        @media (min-width: 768px) {
+            :root {
+                --header-height: 80px;
+            }
+
+            body {
+                padding-top: var(--header-height);
+            }
+
+            .main-header {
+                height: var(--header-height);
+                padding: 0 36px;
+            }
+
+            .mobile-controls-right {
+                gap: 20px;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .hero-section {
+                padding: 32px 36px 56px;
+                min-height: 70vh;
+            }
+
+            .hero-container {
+                flex-direction: row;
+                gap: 48px;
+            }
+
+            .hero-text-content {
+                text-align: left;
+                flex: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 2.8rem;
+            }
+
+            .hero-actions {
+                flex-direction: row;
+                gap: 16px;
+                justify-content: flex-start;
+            }
+
+            .hero-phone-display {
+                flex: 0.8;
+                max-width: 360px;
+            }
+
+            .hero-phone-frame {
+                max-width: 300px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .included-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .benefits-container {
+                flex-direction: row;
+                gap: 48px;
+                align-items: center;
+            }
+
+            .benefits-content {
+                flex: 1.2;
+            }
+
+            .benefits-media {
+                flex: 1;
+            }
+
+            .macbook-container {
+                max-width: 460px;
+            }
+
+            .iphone-overlay {
+                width: 110px;
+                height: 220px;
+                right: -6px;
+                bottom: 8px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .steps-container {
+                flex-direction: row;
+                gap: 12px;
+            }
+
+            .step-card {
+                flex: 1;
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 16px;
+            }
+
+            .step-number {
+                width: 44px;
+                height: 44px;
+                font-size: 0.95rem;
+            }
+
+            .footer-main-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                align-items: flex-start;
+            }
+
+            .footer-brand-block {
+                align-items: flex-start;
+            }
+
+            .footer-links-block {
+                text-align: left;
+                gap: 8px 32px;
+            }
+
+            .categories-grid {
+                gap: 32px;
+            }
+
+            .category-item {
+                width: 160px;
+            }
+
+            .circle-thumb {
+                width: 128px;
+                height: 128px;
+            }
+
+            .slogan-title {
+                font-size: 2rem;
+            }
+
+            .mobile-menu-overlay.active {
+                padding: 24px 36px 32px;
+            }
+
+            .pricing-box {
+                padding: 36px 32px 40px;
+            }
+
+            section[id],
+            .benefits-section,
+            .how-to-order-section,
+            .catalog-top-section,
+            .pricing-section,
+            .featured-section {
+                scroll-margin-top: calc(var(--header-height) + 20px);
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .main-header {
+                padding: 0 48px;
+            }
+
+            .nav-left,
+            .nav-right {
+                display: flex;
+            }
+
+            .mobile-controls-right {
+                gap: 28px;
+            }
+
+            .burger-menu {
+                display: none;
+            }
+
+            .mobile-menu-overlay {
+                display: none !important;
+            }
+
+            .hero-subtitle {
+                font-size: 3.6rem;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 28px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 24px;
+            }
+
+            .included-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-box {
+                padding: 40px 48px 48px;
+            }
+
+            .category-item {
+                width: 180px;
+            }
+
+            .circle-thumb {
+                width: 140px;
+                height: 140px;
+            }
+
+            .iphone-overlay {
+                width: 130px;
+                height: 260px;
+                right: -10px;
+                bottom: 12px;
+                border-width: 5px;
+                border-radius: 22px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1280px) {
+            .hero-subtitle {
+                font-size: 4.2rem;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .hero-phone-display {
+                max-width: 420px;
+            }
+
+            .hero-phone-frame {
+                max-width: 340px;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 400px) {
+            .hero-subtitle {
+                font-size: 1.7rem;
+            }
+
+            .btn-main-order {
+                padding: 14px 28px;
+                font-size: 0.75rem;
+            }
+
+            .cards-container {
+                gap: 12px;
+            }
+
+            .invitation-card {
+                padding: 10px 8px 14px;
+            }
+
+            .card-title {
+                font-size: 0.8rem;
+            }
+
+            .btn-card {
+                font-size: 0.58rem;
+                padding: 6px 8px;
+            }
+
+            .brand-name {
+                font-size: 1rem;
+            }
+
+            .site-logo {
+                height: 28px;
+            }
+
+            .language-switcher {
+                gap: 2px;
+                padding: 2px 4px;
+            }
+
+            .lang-btn {
+                font-size: 0.55rem;
+                padding: 4px 8px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .included-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .iphone-overlay {
+                width: 65px;
+                height: 130px;
+                right: -2px;
+                bottom: 4px;
+                border-width: 3px;
+                border-radius: 14px;
+            }
+
+            .iphone-island {
+                width: 20px;
+                height: 6px;
+                top: 4px;
+            }
+
+            .macbook-screen {
+                border-width: 6px;
+                border-top-width: 8px;
+                border-bottom-width: 8px;
+            }
+
+            .macbook-notch {
+                width: 32px;
+                height: 5px;
+            }
+
+            .hero-phone-frame {
+                max-width: 220px;
+                border-width: 5px;
+                border-radius: 28px;
+            }
+
+            .hero-dynamic-island {
+                width: 50px;
+                height: 15px;
+                top: 10px;
+            }
+
+            .pricing-box {
+                padding: 20px 16px 24px;
+            }
+
+            .service-left {
+                font-size: 0.75rem;
+            }
+            .service-price {
+                font-size: 0.75rem;
+            }
+            .included-item {
+                font-size: 0.75rem;
+            }
+
+            .step-text {
+                font-size: 0.8rem;
+            }
+
+            .slogan-title {
+                font-size: 1.3rem;
+            }
+            .slogan-title::before,
+            .slogan-title::after {
+                content: '';
+            }
+        }
+
+        /* ===== 14. UTILITY ===== */
+        .text-gold {
+            color: var(--accent);
+        }
+
+        [data-aos] {
+            pointer-events: none;
+        }
+
+        [data-aos].aos-animate {
+            pointer-events: auto;
+        }
+
+        /* ===== 15. AOS OVERRIDES ===== */
+        .aos-init {
+            opacity: 0;
+        }
+        .aos-animate {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+    /* Mobile-ի վրա ստիպում ենք, որ բոլոր տարրերը միանգամից երևան */
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="main-header" id="mainHeader">
+        <nav class="nav-container">
+            <div class="logo-container" onclick="window.location.href='index.html'">
+                <img src="invite logo.png" alt="InviteArt" class="site-logo" onerror="this.style.display='none'" />
+                <span class="brand-name">InviteArt</span>
+            </div>
+
+            <div class="nav-left">
+                <a href="index.html" id="nav-about">Մեր մասին</a>
+                <a href="index.html#services" id="nav-services">Ծառայություններ</a>
+                <a href="catalog.html" id="nav-invitations" class="active">Հրավիրատոմսեր</a>
+            </div>
+
+            <div class="nav-right">
+                <a href="#how-to-order" id="nav-how-to-order">Ինչպես պատվիրել</a>
+                <a href="contact.html" id="nav-contact">Հետադարձ կապ</a>
+            </div>
+
+            <div class="mobile-controls-right">
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="changeLanguage('hy', event)">HY</button>
+                    <button class="lang-btn" onclick="changeLanguage('ru', event)">RU</button>
+                    <button class="lang-btn" onclick="changeLanguage('en', event)">EN</button>
+                </div>
+
+                <button class="burger-menu" onclick="toggleMobileMenu()" id="burgerBtn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="mobile-menu-overlay" id="mobileMenu">
+            <div class="mobile-menu-links">
+                <a href="index.html" onclick="toggleMobileMenu()"><i class="fas fa-home"></i> <span id="mob-about">Մեր մասին</span></a>
+                <a href="index.html#services" onclick="toggleMobileMenu()"><i class="fas fa-cog"></i> <span id="mob-services">Ծառայություններ</span></a>
+                <a href="catalog.html" onclick="toggleMobileMenu()"><i class="fas fa-envelope-open-text"></i> <span id="mob-invitations">Հրավիրատոմսեր</span></a>
+                <a href="#how-to-order" onclick="toggleMobileMenu()"><i class="fas fa-question-circle"></i> <span id="mob-how-to-order">Ինչպես պատվիրել</span></a>
+                <a href="contact.html" onclick="toggleMobileMenu()"><i class="fas fa-phone-alt"></i> <span id="mob-contact">Հետադարձ կապ</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-section" id="about" data-aos="fade-up" data-aos-duration="800">
+        <div class="hero-container">
+            <div class="hero-text-content">
+                <div class="hero-badge">✨ Էլեկտրոնային հրավեր</div>
+                <h1 class="brand-title">InviteArt</h1>
+                <h2 class="hero-subtitle" id="hero-subtitle">
+                    ԷԼԵԿՏՐՈՆԱՅԻՆ<br /><span>ՀՐԱՎԻՐԱՏՈՄՍԵՐ</span>
+                </h2>
+                <p class="hero-tagline" id="hero-tagline">և ոչ միայն...</p>
+                <div class="hero-actions">
+                    <button class="btn-main-order open-popup-trigger btn-text-order">ՊԱՏՎԻՐԵԼ</button>
+                    <a href="#catalog" class="btn-main-outline">Տեսնել նմուշները</a>
+                </div>
+            </div>
+
+            <div class="hero-phone-display">
+                <div class="hero-phone-frame">
+                    <div class="hero-dynamic-island"></div>
+                    <video class="hero-screen-img" autoplay loop muted playsinline>
+                        <source src="1.mov" type="video/mp4" />
+                        Ձեր բրաուզերը չի աջակցում վիդեո թեգը:
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SLOGAN ===== -->
+    <section class="slogan-section" data-aos="fade-up" data-aos-delay="80" data-aos-duration="800">
+        <h2 class="slogan-title" id="slogan-title">ՏՈՆԸ ՍԿՍՎՈՒՄ Է ՀՐԱՎԵՐԻՑ</h2>
+        <p class="slogan-text" id="slogan-text">
+            Պատրա՞ստ եք տոնը սկսել հետաքրքիր, հուզիչ և լի անակնկալներով:<br />
+            Ցանկանո՞ւմ եք հյուրեր հրավիրելու գործընթացը վերածել անմոռանալի ճամփորդության:
+        </p>
+        <p class="slogan-subtext" id="slogan-subtext">
+            Ընդամենը հաշված օրերի ընթացքում Դուք կարող եք ունենալ Ձեր անձնական էլեկտրոնային հրավիրատոմսը,
+            որը կարող եք ուղարկել անսահմանափակ թվով հյուրերի՝ Ձեզ հարմար եղանակով, աշխարհի ցանկացած կետ։
+        </p>
+    </section>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section class="catalog-top-section" id="catalog" data-aos="fade-up" data-aos-duration="800">
+        <h2 class="catalog-main-title" id="catalog-title">Ընտրեք կատեգորիան</h2>
+        <div class="categories-grid">
+            <div class="category-item" onclick="window.location.href='catalog.html'" data-aos="zoom-in" data-aos-delay="50">
+                <div class="circle-thumb"><img src="https://mamul.am/images/photos/200824/120-hoganoc-harsaniq-e-kazmake-n187223-1.jpg" alt="Wedding" loading="lazy" /></div>
+                <h4 id="cat-wedding">ՀԱՐՍԱՆԻՔ<span>(ՆՇԱՆԱԴՐՈՒԹՅՈՒՆ)</span></h4>
+            </div>
+            <div class="category-item" onclick="window.location.href='catalog.html'" data-aos="zoom-in" data-aos-delay="100">
+                <div class="circle-thumb"><img src="https://optim.tildacdn.one/tild3435-3433-4439-b261-343465303062/-/resize/170x/-/format/webp/5370999373112147101_.png.webp" alt="Baptism" loading="lazy" /></div>
+                <h4 id="cat-baptism">ԿՆՈՒՆՔ</h4>
+            </div>
+            <div class="category-item" onclick="window.location.href='catalog.html'" data-aos="zoom-in" data-aos-delay="150">
+                <div class="circle-thumb"><img src="https://www.oetker.ca/assets/recipes/assets/b75297c3976e41a39cf3e74376d1459a/360x400/birthday-cake-11.webp" alt="Birthday" loading="lazy" /></div>
+                <h4 id="cat-birthday">ԾՆՈՒՆԴ</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED ===== -->
+    <section class="featured-section" data-aos="fade-up" data-aos-duration="800">
+        <h3 class="section-title" id="featured-title">Ամենապահանջվածները</h3>
+        <p class="section-subtitle">⭐ Հավաքածուից</p>
+        <div class="slider-wrapper">
+            <div class="cards-container">
+
+                <div class="invitation-card" data-aos="fade-up" data-aos-delay="40">
+                    <div class="phone-wrapper">
+                        <div class="phone-frame">
+                            <div class="phone-island"></div>
+                            <img src="1hamar.png" alt="Flight of Love" class="screen-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                    <h4 class="card-title">Flight of Love</h4>
+                    <p class="card-price">10 000 ֏</p>
+                    <div class="card-actions">
+                        <a href="https://lively-boba-87005d.netlify.app/" target="_blank" class="btn-card btn-view btn-text-view">Դիտել</a>
+                        <button class="btn-card btn-order open-popup-trigger btn-text-order">Պատվիրել</button>
+                    </div>
+                </div>
+
+                <div class="invitation-card" data-aos="fade-up" data-aos-delay="80">
+                    <div class="phone-wrapper">
+                        <div class="badge-new">NEW</div>
+                        <div class="phone-frame">
+                            <div class="phone-island"></div>
+                            <img src="2hamar.png" alt="Angels" class="screen-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                    <h4 class="card-title">Angels</h4>
+                    <p class="card-price">9 500 ֏</p>
+                    <div class="card-actions">
+                        <a href="https://sunny-florentine-503138.netlify.app/" target="_blank" class="btn-card btn-view btn-text-view">Դիտել</a>
+                        <button class="btn-card btn-order open-popup-trigger btn-text-order">Պատվիրել</button>
+                    </div>
+                </div>
+
+                <div class="invitation-card" data-aos="fade-up" data-aos-delay="120">
+                    <div class="phone-wrapper">
+                        <div class="phone-frame">
+                            <div class="phone-island"></div>
+                            <img src="4hamar.png" alt="LoveNodes" class="screen-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                    <h4 class="card-title">LoveNodes</h4>
+                    <p class="card-price">12 000 ֏</p>
+                    <div class="card-actions">
+                        <a href="https://inspiring-lokum-aa5175.netlify.app/" target="_blank" class="btn-card btn-view btn-text-view">Դիտել</a>
+                        <button class="btn-card btn-order open-popup-trigger btn-text-order">Պատվիրել</button>
+                    </div>
+                </div>
+
+                <div class="invitation-card" data-aos="fade-up" data-aos-delay="160">
+                    <div class="phone-wrapper">
+                        <div class="phone-frame">
+                            <div class="phone-island"></div>
+                            <img src="8hamar.png" alt="Elegance In Motion" class="screen-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                    <h4 class="card-title">Elegance In Motion</h4>
+                    <p class="card-price">14 000 ֏</p>
+                    <div class="card-actions">
+                        <a href="https://hayksusanna.netlify.app/" target="_blank" class="btn-card btn-view btn-text-view">Դիտել</a>
+                        <button class="btn-card btn-order open-popup-trigger btn-text-order">Պատվիրել</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="view-all-container">
+            <a href="catalog.html" class="btn-view-all" id="btn-view-all">Տեսնել բոլորը</a>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="pricing-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="pricing-box">
+            <h3 class="pricing-subtitle" id="pricing-subtitle-include"><i class="fas fa-check-circle"></i> Բոլոր օրինակները ներառում են՝</h3>
+            <div class="included-grid" id="included-grid-box"></div>
+
+            <h3 class="pricing-subtitle" id="pricing-subtitle-services"><i class="fas fa-plus-circle"></i> Լրացուցիչ ծառայություններ՝</h3>
+            <div class="services-list" id="services-list-box"></div>
+
+            <div class="pricing-action-container">
+                <button class="btn-pricing-order open-popup-trigger btn-text-order">ՊԱՏՎԻՐԵԼ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BENEFITS ===== -->
+    <section class="benefits-section" id="services" data-aos="fade-up" data-aos-duration="800">
+        <div class="benefits-container">
+            <div class="benefits-media" data-aos="fade-right" data-aos-duration="800">
+                <div class="macbook-container">
+                    <div class="macbook-screen">
+                        <div class="macbook-notch"></div>
+                        <div class="macbook-content">
+                            <img src="macbook1.png" alt="MacBook Invitation" class="macbook-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                    <div class="macbook-body"></div>
+                    <div class="macbook-base"></div>
+
+                    <div class="iphone-overlay">
+                        <div class="iphone-island"></div>
+                        <div class="iphone-content">
+                            <img src="iphone2.png" alt="iPhone Invitation" class="iphone-content-img" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-content" data-aos="fade-left" data-aos-duration="800">
+                <div class="benefits-header">
+                    <h3 id="benefits-title">Ինչո՞ւ հենց էլ.հրավիրատոմսը</h3>
+                    <p id="benefits-subtitle">առավելությունները թղթային տարբերակից</p>
+                </div>
+                <div class="benefits-grid" id="benefits-grid-box"></div>
+                <p class="benefits-footer-text" id="benefits-footer">… քայլի՛ր ժամանակին համընթաց</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW TO ORDER ===== -->
+    <section class="how-to-order-section" id="how-to-order" data-aos="fade-up" data-aos-duration="800">
+        <h3 class="section-title" id="how-to-order-title">Ինչպե՞ս պատվիրել</h3>
+        <p class="section-subtitle">📬 3 պարզ քայլ</p>
+        <div class="steps-container" id="steps-container-box"></div>
+        <div class="messenger-buttons">
+            <a href="https://t.me/+SIRvplypwyI4YTAy" class="btn-messenger" target="_blank">
+                <i class="fab fa-telegram-plane"></i> Telegram
+            </a>
+            <a href="https://wa.me/37498002690" class="btn-messenger" target="_blank" style="background:#25D366; border-color:#25D366;">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-main-content">
+                <div class="footer-brand-block">
+                    <span class="footer-brand-name">InviteArt</span>
+                    <p class="footer-copyright" id="footer-copy">
+                        Բոլոր իրավունքները պաշտպանված են ©<br />Կայքը պատրաստված է սիրով։
+                    </p>
+                </div>
+                <div class="footer-links-block">
+                    <a href="index.html" class="f-link-about">Մեր մասին</a>
+                    <a href="catalog.html" class="f-link-inv">Հրավիրատոմսեր</a>
+                    <a href="index.html#services" class="f-link-serv">Ծառայություններ</a>
+                    <a href="contact.html" class="f-link-cont">Հետադարձ կապ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== FLOATING WHATSAPP ===== -->
+    <a href="https://wa.me/37498002690" class="floating-chat" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js">
+    </script>
+
+    <script>
+        // ============================================================
+        // 0. AOS INIT
+        // ============================================================
+       
+
+        // ============================================================
+        // 1. HEADER SCROLL EFFECT
+        // ============================================================
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================================
+        // 2. MOBILE MENU TOGGLE
+        // ============================================================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('burgerBtn');
+            menu.classList.toggle('active');
+            btn.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.getElementById('burgerBtn').classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('burgerBtn');
+            if (menu.classList.contains('active') &&
+                !menu.contains(e.target) &&
+                !btn.contains(e.target)) {
+                menu.classList.remove('active');
+                btn.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 3. ORDER POPUP REDIRECT
+        // ============================================================
+        function openPopup() {
+            window.location.href = 'order.html';
+        }
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('open-popup-trigger')) {
+                openPopup();
+            }
+        });
+
+        // ============================================================
+        // 4. MULTI-LANGUAGE SYSTEM
+        // ============================================================
+        const translations = {
+            hy: {
+                navAbout: "Մեր մասին",
+                navServices: "Ծառայություններ",
+                navInvitations: "Հրավիրատոմսեր",
+                navHow: "Ինչպես պատվիրել",
+                navContact: "Հետադարձ կապ",
+                heroSub: "ԷԼԵԿՏՐՈՆԱՅԻՆ<br><span>ՀՐԱՎԻՐԱՏՈՄՍԵՐ</span>",
+                heroTag: "և ոչ միայն...",
+                btnOrder: "ՊԱՏՎԻՐԵԼ",
+                btnView: "Դիտել",
+                sloganTitle: "ՏՈՆԸ ՍԿՍՎՈՒՄ Է ՀՐԱՎԵՐԻՑ",
+                sloganText: "Պատրա՞ստ եք տոնը սկսել հետաքրքիր, հուզիչ և լի անակնկալներով:<br>Ցանկանո՞ւմ եք հյուրեր հրավիրելու գործընթացը վերածել անմոռանալի ճամփորդության:",
+                sloganSub: "Ընդամենը հաշված օրերի ընթացքում Դուք կարող եք ունենալ Ձեր անձնական էլեկտրոնային հրավիրատոմսը, որը կարող եք ուղարկել անսահմանափակ թվով հյուրերի՝ Ձեզ հարմար եղանակով, աշխարհի ցանկացած կետ։",
+                catTitle: "Ընտրեք կատեգորիան",
+                catWedding: "ՀԱՐՍԱՆԻՔ<span>(ՆՇԱՆԱԴՐՈՒԹՅՈՒՆ)</span>",
+                catBaptism: "ԿՆՈՒՆՔ",
+                catBirthday: "ԾՆՈՒՆԴ",
+                featuredTitle: "Ամենապահանջվածները",
+                btnViewAll: "Տեսնել բոլորը",
+                priceIncTitle: "Բոլոր օրինակները ներառում են՝",
+                priceServTitle: "Լրացուցիչ ծառայություններ՝",
+                benefitsTitle: "Ինչո՞ւ հենց էլ.հրավիրատոմսը",
+                benefitsSub: "առավելությունները թղթային տարբերակից",
+                benefitsFoot: "… քայլի՛ր ժամանակին համընթաց",
+                howTitle: "Ինչպե՞ս պատվիրել",
+                footerCopy: "Բոլոր իրավունքները պաշտպանված են ©<br>Կայքը պատրաստված է սիրով։",
+                includes: ["Քարտեզներ՝ լինքով բացվող", "Հետհաշվարկ", "Անսահմանափակ նկարներ", "Վիդեո", "Ժամանակացույց", "Միջոցառման բոլոր մանրամասները"],
+                services: [
+                    { n: "Երաժշտություն", p: "2000 ֏", i: "fa-music" },
+                    { n: "Դրեսսկոդ (Կախված դիզայնից)", p: "0-2000 ֏", i: "fa-shirt" },
+                    { n: "Հյուրերի մասնակցության հաստատում էլ. փոստով", p: "5000 ֏", i: "fa-envelope" },
+                    { n: "Հյուրերի մասնակցության հաստատում Telegram-ով", p: "5000 ֏", i: "fa-telegram" },
+                    { n: "Հյուրերի ցուցակ ըստ սեղանների", p: "4000 ֏", i: "fa-table" },
+                    { n: "Երկլեզու", p: "6000 ֏", i: "fa-language" },
+                    { n: "Եռալեզու", p: "9000 ֏", i: "fa-language" },
+                    { n: "Անվանական հրավեր", p: "Քննարկելի", i: "fa-user-tag" },
+                    { n: "Անհատական դիզայն", p: "Քննարկելի", i: "fa-pen-nib" }
+                ],
+                benefits: [
+                    { t: "Ամեն բան մեկ տեղում", d: "Կարիք չկա մտահոգվելու ամեն մանրուքի համար․ ուղարկիր հյուրերին էլ․ հրավերը և վերջ։",
+                        icon: "🌐" },
+                    { t: "Հարմարավետություն", d: "Ուղարկեք Ձեր էլ․ հրավերը ցանկացած եղանակով՝ աշխարհի ցանկացած կետ։",
+                        icon: "📋" },
+                    { t: "Գումարի խնայում", d: "Պատվիրելով էլ․ հրավեր, Դուք խնայում եք մինչև 50․000 դրամ։",
+                        icon: "👛" },
+                    { t: "Ժամանակի շահում", d: "Պատրաստվում է 2-3 աշխ․ օրում՝ բոլոր անհրաժեշտ տվյալները ստանալուց հետո։",
+                        icon: "🕒" },
+                    { t: "Շրջակա միջավայր", d: "Չի օգտագործվում թուղթ, պլաստիկ և այլ նյութեր, որոնք վնասում են մեր մոլորակին։",
+                        icon: "🌱" },
+                    { t: "Հետադարձ կապ", d: "Ցանկացած ֆորս մաժորի ժամանակ փոփոխություններ կատարելը կլինի անվճար։",
+                        icon: "💬" }
+                ],
+                steps: [
+                    "Ընտրեք Ձեր նախընտրած էլ.հրավիրատոմսը և գրեք մեզ մեսենջերներից մեկով",
+                    "Անհրաժեշտ տվյալները ստանալուց հետո մենք անցնում ենք աշխատանքի",
+                    "Եվ ահա՛․ հաշված օրերի ընթացքում Ձեր էլ․ հրավերը կլինի պատրաստ։"
+                ]
+            },
+            ru: {
+                navAbout: "О нас",
+                navServices: "Услуги",
+                navInvitations: "Пригласительные",
+                navHow: "Как заказать",
+                navContact: "Контакты",
+                heroSub: "ЭЛЕКТРОННЫЕ<br><span>ПРИГЛАСИТЕЛЬНЫЕ</span>",
+                heroTag: "и не только...",
+                btnOrder: "ЗАКАЗАТЬ",
+                btnView: "Смотреть",
+                sloganTitle: "ПРАЗДНИК НАЧИНАЕТСЯ С ПРИГЛАШЕНИЯ",
+                sloganText: "Готовы начать праздник интересно, волнующе и с сюрпризами?<br>Хотите превратить процесс приглашения гостей в незабываемое путешествие?",
+                sloganSub: "Всего за несколько дней вы получите персональное электронное приглашение, которое сможете отправить неограниченному числу гостей любым удобным способом в любую точку мира.",
+                catTitle: "Выберите категорию",
+                catWedding: "СВАДЬБА<span>(ПОМОЛВКА)</span>",
+                catBaptism: "КРЕЩЕНИЕ",
+                catBirthday: "ДЕНЬ РОЖДЕНИЯ",
+                featuredTitle: "Популярные",
+                btnViewAll: "Посмотреть все",
+                priceIncTitle: "Все варианты включают:",
+                priceServTitle: "Дополнительные услуги:",
+                benefitsTitle: "Почему электронное приглашение?",
+                benefitsSub: "Преимущества перед бумажной версией",
+                benefitsFoot: "… идите в ногу со временем",
+                howTitle: "Как заказать",
+                footerCopy: "Все права защищены ©<br>Сайт сделан с любовью.",
+                includes: ["Карты с переходом по ссылке", "Обратный отсчет", "Галерея фото без ограничений", "Видео",
+                    "Таймлайн мероприятия", "Все детали события в одном месте"
+                ],
+                services: [
+                    { n: "Музыкальное сопровождение", p: "2000 ֏", i: "fa-music" },
+                    { n: "Дресс-код (в зависимости от дизайна)", p: "0-2000 ֏", i: "fa-shirt" },
+                    { n: "Подтверждение присутствия по Email (Excel)", p: "5000 ֏", i: "fa-envelope" },
+                    { n: "Подтверждение присутствия через Telegram", p: "5000 ֏", i: "fa-telegram" },
+                    { n: "Рассадка гостей по столам", p: "4000 ֏", i: "fa-table" },
+                    { n: "Двуязычный вариант", p: "6000 ֏", i: "fa-language" },
+                    { n: "Трехязычный вариант", p: "9000 ֏", i: "fa-language" },
+                    { n: "Именные (индивидуальные) приглашения", p: "Обсуждаемо", i: "fa-user-tag" },
+                    { n: "Индивидуальный дизайн", p: "Обсуждаемо", i: "fa-pen-nib" }
+                ],
+                benefits: [
+                    { t: "Всё в одном месте", d: "Не нужно беспокоиться о мелочах: отправьте гостям ссылку и готово.",
+                        icon: "🌐" },
+                    { t: "Удобство", d: "Отправляйте приглашение любым удобным способом в любую точку планеты.",
+                        icon: "📋" },
+                    { t: "Экономия бюджета", d: "Заказывая электронную версию, вы экономите до 50,000 драм.",
+                        icon: "👛" },
+                    { t: "Экономия времени", d: "Готовность за 2-3 рабочих дня после получения всех данных.",
+                        icon: "🕒" },
+                    { t: "Забота о природе", d: "Не используется бумага и пластик, загрязняющие нашу планету.",
+                        icon: "🌱" },
+                    { t: "Обратная связь", d: "Внесение изменений при любом форс-мажоре бесплатно.", icon: "💬" }
+                ],
+                steps: [
+                    "Выберите понравившийся дизайн и напишите нам в любой мессенджер",
+                    "После получения данных мы сразу приступаем к разработке",
+                    "И готово! Через считанные дни ваше приглашение будет у вас."
+                ]
+            },
+            en: {
+                navAbout: "About Us",
+                navServices: "Services",
+                navInvitations: "Invitations",
+                navHow: "How to Order",
+                navContact: "Contact",
+                heroSub: "DIGITAL<br><span>INVITATIONS</span>",
+                heroTag: "and more...",
+                btnOrder: "ORDER NOW",
+                btnView: "View",
+                sloganTitle: "THE CELEBRATION STARTS WITH AN INVITATION",
+                sloganText: "Ready to start your celebration in an exciting, moving way full of surprises?<br>Want to turn the guest invitation process into an unforgettable journey?",
+                sloganSub: "In just a few days, you can have your personal digital invitation, which you can send to unlimited guests in any convenient way, anywhere in the world.",
+                catTitle: "Choose a Category",
+                catWedding: "WEDDING<span>(ENGAGEMENT)</span>",
+                catBaptism: "BAPTISM",
+                catBirthday: "BIRTHDAY",
+                featuredTitle: "Most Popular",
+                btnViewAll: "View All",
+                priceIncTitle: "All packages include:",
+                priceServTitle: "Additional services:",
+                benefitsTitle: "Why Digital Invitations?",
+                benefitsSub: "Advantages over paper invitations",
+                benefitsFoot: "… step in lockstep with time",
+                howTitle: "How to Order",
+                footerCopy: "All rights reserved ©<br>Made with love.",
+                includes: ["Interactive maps with links", "Countdown timer", "Unlimited photos", "Video integration",
+                    "Event timeline/schedule", "Full event details"
+                ],
+                services: [
+                    { n: "Background Music", p: "2000 ֏", i: "fa-music" },
+                    { n: "Dress Code Guide (depends on design)", p: "0-2000 ֏", i: "fa-shirt" },
+                    { n: "RSVP Confirmation via Email (Excel)", p: "5000 ֏", i: "fa-envelope" },
+                    { n: "RSVP Confirmation via Telegram Bot", p: "5000 ֏", i: "fa-telegram" },
+                    { n: "Seating chart / Table plan", p: "4000 ֏", i: "fa-table" },
+                    { n: "Bilingual Invitation", p: "6000 ֏", i: "fa-language" },
+                    { n: "Trilingual Invitation", p: "9000 ֏", i: "fa-language" },
+                    { n: "Personalized (individual) links", p: "Negotiable", i: "fa-user-tag" },
+                    { n: "Custom structural design", p: "Negotiable", i: "fa-pen-nib" }
+                ],
+                benefits: [
+                    { t: "All in one place", d: "No need to worry about details: just send the link to guests and that's it.",
+                        icon: "🌐" },
+                    { t: "Ultimate Convenience", d: "Send your digital invitation via any platform to any corner of the world.",
+                        icon: "📋" },
+                    { t: "Cost-effective", d: "By choosing digital, you save up to 50,000 AMD on printing.",
+                        icon: "👛" },
+                    { t: "Time-saving", d: "Ready in just 2-3 working days after receiving all details.",
+                        icon: "🕒" },
+                    { t: "Eco-friendly", d: "Zero paper or plastic waste, keeping our planet green and clean.",
+                        icon: "🌱" },
+                    { t: "Easy Updates", d: "Any text updates due to force majeure will be done completely free.",
+                        icon: "💬" }
+                ],
+                steps: [
+                    "Choose your favorite invitation design and contact us via messengers",
+                    "Once we receive your content, we immediately start development",
+                    "And voilà! Your digital invitation link will be ready in a few days."
+                ]
+            }
+        };
+
+        function changeLanguage(lang, event) {
+            localStorage.setItem("language", lang);
+
+            document.querySelectorAll(".lang-btn").forEach(btn => {
+                btn.classList.remove("active");
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${lang}'`)) {
+                    btn.classList.add("active");
+                }
+            });
+
+            const t = translations[lang];
+
+            document.getElementById("nav-about").innerText = t.navAbout;
+            document.getElementById("nav-services").innerText = t.navServices;
+            document.getElementById("nav-invitations").innerText = t.navInvitations;
+            document.getElementById("nav-how-to-order").innerText = t.navHow;
+            document.getElementById("nav-contact").innerText = t.navContact;
+
+            document.getElementById("mob-about").innerText = t.navAbout;
+            document.getElementById("mob-services").innerText = t.navServices;
+            document.getElementById("mob-invitations").innerText = t.navInvitations;
+            document.getElementById("mob-how-to-order").innerText = t.navHow;
+            document.getElementById("mob-contact").innerText = t.navContact;
+
+            document.getElementById("hero-subtitle").innerHTML = t.heroSub;
+            document.getElementById("hero-tagline").innerText = t.heroTag;
+            document.querySelectorAll(".btn-text-order").forEach(b => b.innerText = t.btnOrder);
+            document.querySelectorAll(".btn-text-view").forEach(b => b.innerText = t.btnView);
+
+            document.getElementById("slogan-title").innerText = t.sloganTitle;
+            document.getElementById("slogan-text").innerHTML = t.sloganText;
+            document.getElementById("slogan-subtext").innerText = t.sloganSub;
+
+            document.getElementById("catalog-title").innerText = t.catTitle;
+            document.getElementById("cat-wedding").innerHTML = t.catWedding;
+            document.getElementById("cat-baptism").innerText = t.catBaptism;
+            document.getElementById("cat-birthday").innerText = t.catBirthday;
+
+            document.getElementById("featured-title").innerText = t.featuredTitle;
+            document.getElementById("btn-view-all").innerText = t.btnViewAll;
+
+            document.getElementById("pricing-subtitle-include").innerHTML =
+                `<i class="fas fa-check-circle"></i> ${t.priceIncTitle}`;
+            document.getElementById("pricing-subtitle-services").innerHTML =
+                `<i class="fas fa-plus-circle"></i> ${t.priceServTitle}`;
+
+            let incHtml = "";
+            t.includes.forEach(item => {
+                incHtml += `<div class="included-item"><i class="fa-solid fa-check"></i> ${item}</div>`;
+            });
+            document.getElementById("included-grid-box").innerHTML = incHtml;
+
+            let servHtml = "";
+            t.services.forEach(s => {
+                servHtml += `<div class="service-row">
+                <div class="service-left"><i class="fa-solid ${s.i}"></i> ${s.n}</div>
+                <div class="service-price">${s.p}</div>
+              </div>`;
+            });
+            document.getElementById("services-list-box").innerHTML = servHtml;
+
+            document.getElementById("benefits-title").innerText = t.benefitsTitle;
+            document.getElementById("benefits-subtitle").innerText = t.benefitsSub;
+            document.getElementById("benefits-footer").innerText = t.benefitsFoot;
+
+            let benHtml = "";
+            t.benefits.forEach((b, i) => {
+                benHtml += `<div class="benefit-item" data-aos="fade-up" data-aos-delay="${i * 50}">
+                <div class="benefit-icon">${b.icon}</div>
+                <div class="benefit-info"><h4>${b.t}</h4><p>${b.d}</p></div>
+              </div>`;
+            });
+            document.getElementById("benefits-grid-box").innerHTML = benHtml;
+
+            document.getElementById("how-to-order-title").innerText = t.howTitle;
+            let stepHtml = "";
+            t.steps.forEach((step, idx) => {
+                stepHtml += `<div class="step-card" data-aos="fade-up" data-aos-delay="${idx * 60}">
+                <div class="step-number">${idx + 1}</div>
+                <p class="step-text">${step}</p>
+              </div>`;
+            });
+            document.getElementById("steps-container-box").innerHTML = stepHtml;
+
+            document.getElementById("footer-copy").innerHTML = t.footerCopy;
+            document.querySelectorAll(".f-link-about").forEach(el => el.innerText = t.navAbout);
+            document.querySelectorAll(".f-link-inv").forEach(el => el.innerText = t.navInvitations);
+            document.querySelectorAll(".f-link-serv").forEach(el => el.innerText = t.navServices);
+            document.querySelectorAll(".f-link-cont").forEach(el => el.innerText = t.navContact);
+
+            if (typeof AOS !== 'undefined') {
+    AOS.init();
+}
+        }
+
+// ============================================================
+// 5. LOAD SAVED LANGUAGE & INITIALIZE AOS AFTER DOM WORK
+// ============================================================
+window.addEventListener("load", () => {
+    const savedLang = localStorage.getItem("language") || "hy";
+    
+    // 1. Սկզբից գեներացնում ենք բոլոր HTML էլեմենտները
+    changeLanguage(savedLang);
+    
+    // 2. Միայն դրանից հետո միացնում ենք AOS-ը
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                once: true,
+                duration: 700,
+                easing: 'ease-out-cubic',
+
+            });
+        }
+    }, 150); // փոքրիկ դադար, որ JS-ը հասցնի տարրերը տեղադրել
+});
+        // ============================================================
+        // 6. SMOOTH SCROLL FOR ANCHOR LINKS (optional extra)
+        // ============================================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === "#") return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = parseInt(getComputedStyle(document.documentElement)
+                        .getPropertyValue('--header-height')) || 72;
+                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 16;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

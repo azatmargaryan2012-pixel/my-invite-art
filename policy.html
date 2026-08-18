@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="siteTitle">Գաղտնիության Քաղաքականություն - InviteArt</title>
+  <style>
+    /* ԳՈՒՆԱՅԻՆ ՊԱԼԻՏՐԱ */
+    :root {
+      --bg-color: #fbf8f5;     /* Էլեգանտ բեժ ֆոն */
+      --primary-color: #3d342e; /* Մուգ սուրճի գույն տեքստի համար */
+      --accent-color: #d4af37;  /* Ոսկեգույն շեշտադրումներ */
+      --card-bg: #ffffff;
+      --text-muted: #6e6259;
+      --border-color: rgba(61, 52, 46, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', BlinkMacSystemFont, Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      line-height: 1.7;
+      padding: 0;
+    }
+
+    /* HEADER & NAVIGATION ROW */
+    .policy-header {
+      background-color: var(--card-bg);
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(61, 52, 46, 0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .header-nav-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* ԼԵԶՎԻ ԿՈՃԱԿՆԵՐԻ ԲԼՈԿ (PREMIUM DESIGN) */
+    .lang-switcher-container {
+      display: flex;
+      background: rgba(61, 52, 46, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-switcher-container .switch-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 16px;
+      transition: all 0.25s ease;
+    }
+
+    .lang-switcher-container .switch-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .lang-switcher-container .switch-btn.active {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT CONTAINER */
+    .policy-container {
+      max-width: 800px;
+      margin: 60px auto;
+      background-color: var(--card-bg);
+      padding: 50px 40px;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(61, 52, 46, 0.03);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .last-updated {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: rgba(61, 52, 46, 0.1);
+      margin: 30px 0;
+    }
+
+    section {
+      margin-bottom: 35px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::before {
+      content: '■';
+      color: var(--accent-color);
+      font-size: 0.8rem;
+    }
+
+    p, li {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--accent-color);
+    }
+
+    /* FOOTER / BACK BUTTON */
+    .back-home-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .btn-back {
+      display: inline-block;
+      padding: 12px 35px;
+      background-color: var(--primary-color);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: 1px solid var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .policy-header {
+        padding: 15px 20px;
+      }
+      .policy-container {
+        margin: 20px 15px;
+        padding: 30px 20px;
+      }
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="policy-header">
+    <div class="header-nav-wrapper">
+      <a href="index.html" class="logo-container">
+        <span class="brand-name">InviteArt</span>
+      </a>
+      
+      <!-- Գեղեցիկ Լեզվափոխիչ Կոճակներ -->
+      <div class="lang-switcher-container">
+        <button class="switch-btn active" onclick="setLanguage('hy')" id="btn-hy">HY</button>
+        <button class="switch-btn" onclick="setLanguage('ru')" id="btn-ru">RU</button>
+        <button class="switch-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="policy-container">
+    <h1 id="mainTitle">Գաղտնիության Քաղաքականություն</h1>
+    <div class="last-updated" id="lastUpdated">Վերջին թարմացումը՝ 03 Հունիսի, 2026թ.</div>
+
+    <p id="mainDescription">
+      Սույն Գաղտնիության քաղաքականությունը սահմանում է, թե ինչպես է <strong>InviteArt</strong>-ը հավաքագրում, օգտագործում և պաշտպանում այն տվյալները, որոնք Դուք տրամադրում եք մեր կայքից օգտվելու ընթացքում: Մենք երաշխավորում ենք Ձեր անձնական տվյալների գաղտնիությունն ու անվտանգությունը՝ համաձայն ՀՀ օրենսդրության:
+    </p>
+
+    <hr>
+
+    <!-- Բովանդակությունը դինամիկ կերպով կգեներացվի JavaScript-ով -->
+    <div id="dynamicSections"></div>
+
+    <div class="back-home-container">
+      <a href="index.html" class="btn-back" id="btnBack">ՎԵՐԱԴԱՌՆԱԼ ԳԼԽԱՎՈՐ ԷՋ</a>
+    </div>
+  </main>
+
+<script>
+  // --------------------- ԹԱՐԳՄԱՆՈՒԹՅՈՒՆՆԵՐԻ ԲԱԶԱ ---------------------
+  const translations = {
+    hy: {
+      siteTitle: "Գաղտնիության Քաղաքականություն - InviteArt",
+      mainTitle: "Գաղտնիության Քաղաքականություն",
+      lastUpdated: "Վերջին թարմացումը՝ 03 Հունիսի, 2026թ.",
+      mainDescription: "Սույն Գաղտնիության քաղաքականությունը սահմանում է, թե ինչպես է <strong>InviteArt</strong>-ը հավաքագրում, օգտագործում և պաշտպանում այն տվյալները, որոնք Դուք տրամադրում եք մեր կայքից օգտվելու ընթացքում: Մենք երաշխավորում ենք Ձեր անձնական տվյալների գաղտնիությունն ու անվտանգությունը՝ համաձայն ՀՀ օրենսդրության:",
+      btnBack: "ՎԵՐԱԴԱՌՆԱԼ ԳԼԽԱՎՈՐ ԷՋ",
+      sections: [
+        {
+          title: "1. Ինչ տվյալներ ենք մենք հավաքագրում",
+          text: "Կայքում տեղադրված պատվերի/հետադարձ կապի ձևերը լրացնելիս մենք կարող ենք հավաքագրել հետևյալ տվյալները.",
+          list: [
+            "Ձեր անունը (կամ անվանումը),",
+            "Հեռախոսահամարը,",
+            "Էլեկտրոնային հասցեն (առկայության դեպքում),",
+            "Պատվերի իրականացման համար անհրաժեշտ լրացուցիչ տեղեկատվություն (օրինակ՝ հարսանիքի կամ միջոցառման ամսաթիվ, վայր):"
+          ]
+        },
+        {
+          title: "2. Ինչպես ենք օգտագործում հավաքագրված տվյալները",
+          text: "Ձեր տրամադրած տեղեկատվությունն օգտագործվում է բացառապես հետևյալ նպատակներով.",
+          list: [
+            "Ձեր պատվերների մշակման և էլեկտրոնային հրավիրատոմսերի պատրաստման համար,",
+            "Ձեզ հետ կապ հաստատելու և պատվերի մանրամասները ճշտելու համար,",
+            "Մեր ծառայությունների որակի բարելավման համար:"
+          ]
+        },
+        {
+          title: "3. Տվյալների փոխանցումը երրորդ անձանց",
+          text: "Մենք չենք վաճառում, չենք փոխանակում և որևէ կերպ երրորդ կողմերին չենք փոխանցում Ձեր անձնական տվյալները: Սա չի ներառում վստահելի գործընկերներին (օրինակ՝ Telegram API ծառայությունը, որի միջոցով հայտը ավտոմատ հասնում է մեր աշխատակցին), ովքեր օգնում են մեզ կայքի շահագործման և Ձեզ սպասարկելու հարցում, քանի դեռ այդ կողմերը պարտավորվում են պահպանել այս տեղեկատվության գաղտնիությունը:"
+        },
+        {
+          title: "4. Տվյալների պաշտպանություն",
+          text: "Մենք կիրառում ենք անվտանգության համապատասխան տեխնիկական և կազմակերպչական միջոցառումներ՝ Ձեր անձնական տվյալները կորստից, չարաշահումից կամ չարտոնված մուտքից պաշտպանելու համար: Կայքում կիրառվում է անվտանգության SSL սերտիֆիկատ (HTTPS):"
+        },
+        {
+          title: "5. Կուկի (Cookies) ֆայլեր",
+          text: "Մեր կայքը կարող է օգտագործել \"cookies\" ֆայլեր՝ օգտատերերի փորձառությունը բարելավելու նպատակով: Դուք կարող եք անջատել cookies-ների ընդունումը Ձեր բրաուզերի կարգավորումներում, սակայն դա կարող է ազդել կայքի որոշ ֆունկցիաների ճիշտ աշխատանքի վրա:"
+        },
+        {
+          title: "6. Ձեր իրավունքները",
+          text: "Դուք իրավունք ունեք ցանկացած պահի դիմել մեզ՝ Ձեր անձնական տվյալները ստուգելու, փոփոխելու կամ մեր տվյալների բազայից ամբողջությամբ հեռացնելու պահանջով:"
+        },
+        {
+          title: "7. Փոփոխություններ գաղտնիության քաղաքականությունում",
+          text: "<strong>InviteArt</strong>-ն իրավունք է վերապահում ցանկացած պահի թարմացնել կամ փոփոխել սույն քաղաքականությունը: Բոլոր փոփոխությունները հրապարակվում են այս էջում՝ նշելով թարմացման ամսաթիվը:"
+        },
+        {
+          title: "8. Հետադարձ կապ",
+          text: "Սույն քաղաքականության վերաբերյալ հարցերի կամ առաջարկությունների դեպքում կարող եք կապ հաստատել մեզ հետ.",
+          extraHtml: "<p>Էլ. հասցե՝ <a href='mailto:info@inviteart.am'>info@inviteart.am</a><br>Հեռախոս՝ +374 (98) 00-26-90</p>"
+        }
+      ]
+    },
+    ru: {
+      siteTitle: "Политика Конфиденциальности - InviteArt",
+      mainTitle: "Политика Конфиденциальности",
+      lastUpdated: "Последнее обновление: 03 июня 2026 г.",
+      mainDescription: "Настоящая Политика конфиденциальности определяет, как <strong>InviteArt</strong> собирает, использует и защищает данные, которые вы предоставляете при использовании нашего сайта. Мы гарантируем конфиденциальность и безопасность ваших личных данных в соответствии с законодательством РА.",
+      btnBack: "ВЕРНУТЬСЯ НА ГЛАВНУЮ",
+      sections: [
+        {
+          title: "1. Какие данные мы собираем",
+          text: "При заполнении форм заказа/обратной связи на сайте мы можем собирать следующие данные:",
+          list: [
+            "Ваше имя (или наименование),",
+            "Номер телефона,",
+            "Адрес электронной почты (при наличии),",
+            "Дополнительная информация, необходимая для выполнения заказа (например, дата свадьбы или мероприятия, место проведения)."
+          ]
+        },
+        {
+          title: "2. Как мы используем собранные данные",
+          text: "Предоставленная вами информация используется исключительно в следующих целях:",
+          list: [
+            "Для обработки ваших заказов и создания электронных пригласительных,",
+            "Для связи с вами и уточнения деталей заказа,",
+            "Для улучшения качества наших услуг."
+          ]
+        },
+        {
+          title: "3. Передача данных третьим лицам",
+          text: "Мы не продаем, не обмениваем и никоим образом не передаем ваши личные данные третьим лицам. Это не относится к доверенным партнерам (например, службе Telegram API, через которую заявка автоматически доходит до нашего сотрудника), которые помогают нам в работе сайта и обслуживании вас, при условии, что эти стороны обязуются сохранять конфиденциальность этой информации."
+        },
+        {
+          title: "4. Защита данных",
+          text: "Мы применяем соответствующие технические и организационные меры безопасности для защиты ваших личных данных от потери, неправомерного использования или несанкционированного доступа. На сайте используется сертификат безопасности SSL (HTTPS)."
+        },
+        {
+          title: "5. Файлы Cookies",
+          text: "Наш сайт может использовать файлы \"cookies\" для улучшения пользовательского опыта. Вы можете отключить прием cookies в настройках вашего браузера, однако это может повлиять на правильную работу некоторых функций сайта."
+        },
+        {
+          title: "6. Ваши права",
+          text: "Вы имеете право в любое время обратиться к Нам с требованием проверить, изменить или полностью удалить ваши личные данные из нашей базы данных."
+        },
+        {
+          title: "7. Изменения в политике конфиденциальности",
+          text: "<strong>InviteArt</strong> оставляет за собой право обновлять или изменять настоящую политику в любое время. Все изменения публикуются на этой странице с указанием даты обновления."
+        },
+        {
+          title: "8. Обратная связь",
+          text: "Если у вас есть вопросы или предложения относительно настоящей политики, вы можете связаться с нами:",
+          extraHtml: "<p>Эл. почта: <a href='mailto:info@inviteart.am'>info@inviteart.am</a><br>Телефон: +374 (98) 00-26-90</p>"
+        }
+      ]
+    },
+    en: {
+      siteTitle: "Privacy Policy - InviteArt",
+      mainTitle: "Privacy Policy",
+      lastUpdated: "Last updated: June 03, 2026",
+      mainDescription: "This Privacy Policy defines how <strong>InviteArt</strong> collects, uses, and protects the data you provide while using our website. We guarantee the confidentiality and security of your personal data in accordance with RA legislation.",
+      btnBack: "BACK TO HOME",
+      sections: [
+        {
+          title: "1. What data we collect",
+          text: "When filling out order/feedback forms on the website, we may collect the following data:",
+          list: [
+            "Your name (or title),",
+            "Phone number,",
+            "Email address (if available),",
+            "Additional information required for order fulfillment (e.g., wedding or event date, venue)."
+          ]
+        },
+        {
+          title: "2. How we use the collected data",
+          text: "The information you provide is used exclusively for the following purposes:",
+          list: [
+            "To process your orders and create electronic invitations,",
+            "To contact you and clarify order details,",
+            "To improve the quality of our services."
+          ]
+        },
+        {
+          title: "3. Data transfer to third parties",
+          text: "We do not sell, trade, or otherwise transfer your personal data to third parties. This does not include trusted partners (such as the Telegram API service, through which the application automatically reaches our employee) who assist us in operating our website and servicing you, so long as those parties agree to keep this information confidential."
+        },
+        {
+          title: "4. Data protection",
+          text: "We implement appropriate technical and organizational security measures to protect your personal data from loss, misuse, or unauthorized access. The website utilizes an SSL security certificate (HTTPS)."
+        },
+        {
+          title: "5. Cookie files",
+          text: "Our website may use \"cookies\" to enhance the user experience. You can disable cookies in your browser settings, but this may affect the proper functioning of certain website features."
+        },
+        {
+          title: "6. Your rights",
+          text: "You have the right to contact us at any time to check, modify, or completely remove your personal data from our database."
+        },
+        {
+          title: "7. Changes to the privacy policy",
+          text: "<strong>InviteArt</strong> reserves the right to update or change this policy at any time. All changes are posted on this page with the update date specified."
+        },
+        {
+          title: "8. Contact Us",
+          text: "If you have any questions or suggestions regarding this policy, you can contact us:",
+          extraHtml: "<p>Email: <a href='mailto:info@inviteart.am'>info@inviteart.am</a><br>Phone: +374 (98) 00-26-90</p>"
+        }
+      ]
+    }
+  };
+
+  // --------------------- ԼԵԶՎԻ ՓՈԽՄԱՆ ՖՈՒՆԿՑԻԱ ---------------------
+  function setLanguage(lang) {
+    localStorage.setItem('inviteart_privacy_lang', lang);
+    
+    // Ակտիվացնել սեղմված կոճակը
+    document.querySelectorAll('.lang-switcher-container .switch-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`btn-${lang}`).classList.add('active');
+
+    const data = translations[lang];
+
+    // Փոխել հիմնական վերնագրերն ու տեքստերը
+    document.getElementById('siteTitle').innerText = data.siteTitle;
+    document.getElementById('mainTitle').innerText = data.mainTitle;
+    document.getElementById('lastUpdated').innerText = data.lastUpdated;
+    document.getElementById('mainDescription').innerHTML = data.mainDescription;
+    document.getElementById('btnBack').innerText = data.btnBack;
+
+    // Դինամիկ սեկցիաների կառուցում
+    const container = document.getElementById('dynamicSections');
+    container.innerHTML = ''; // մաքրել հինը
+
+    data.sections.forEach(sec => {
+      const sectionEl = document.createElement('section');
+      
+      const h2 = document.createElement('h2');
+      h2.innerText = sec.title;
+      sectionEl.appendChild(h2);
+
+      const p = document.createElement('p');
+      p.innerText = sec.text;
+      sectionEl.appendChild(p);
+
+      if (sec.list) {
+        const ul = document.createElement('ul');
+        sec.list.forEach(item => {
+          const li = document.createElement('li');
+          li.innerText = item;
+          ul.appendChild(li);
+        });
+        sectionEl.appendChild(ul);
+      }
+
+      if (sec.extraHtml) {
+        const div = document.createElement('div');
+        div.innerHTML = sec.extraHtml;
+        sectionEl.appendChild(div);
+      }
+
+      container.appendChild(sectionEl);
+    });
+  }
+
+  // Էջի բեռնման ժամանակ ստուգել նախորդ ընտրությունը կամ դնել 'hy'
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('inviteart_privacy_lang') || 'hy';
+    setLanguage(savedLang);
+  });
+</script>
+
+</body>
+</html>
